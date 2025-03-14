@@ -1,1 +1,5 @@
 product_specs/.obsidian
+
+.nx/installation
+.nx/cache
+.nx/workspace-data
