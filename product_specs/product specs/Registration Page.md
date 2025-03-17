@@ -1,5 +1,6 @@
 used to register to the website as a new user.
 contains:
+
 1. a **Sign Up** header
 2. a **full name** field
 3. an **email** field (unique)
