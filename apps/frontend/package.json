@@ -1,8 +1,8 @@
 {
-  "name": "@my-nx-workspace/frontend",
-  "version": "0.0.1",
-  "private": true,
-  "nx": {
-    "name": "frontend"
-  }
+    "name": "@my-nx-workspace/frontend",
+    "version": "0.0.1",
+    "private": true,
+    "nx": {
+        "name": "frontend"
+    }
 }

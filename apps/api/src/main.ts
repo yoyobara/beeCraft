@@ -5,15 +5,17 @@
 
 import express from 'express';
 import * as path from 'path';
-import cors from "cors";
+import cors from 'cors';
 
 const app = express();
-const PORT = 3333
+const PORT = 3333;
 
-app.use(cors({
-  origin: 'http://localhost:4200', // The frontend URL
-  methods: 'GET',
-}));
+app.use(
+    cors({
+        origin: 'http://localhost:4200', // The frontend URL
+        methods: 'GET',
+    })
+);
 
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
 
