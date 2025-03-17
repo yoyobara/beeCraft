@@ -1,0 +1,38 @@
+.navbar {
+    height: 70px;
+    background-color: lightblue;
+
+    display: flex;
+    justify-content: space-between;
+    gap: 25px;
+    padding: 8px 20px;
+}
+
+.navbar_section {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.icon {
+    max-height: 100%;
+    width: auto;
+}
+
+.title {
+    font-size: 60px;
+    font-weight: 300;
+}
+
+.navbar_link {
+    background-color: transparent;
+    font-size: 20px;
+    font-weight: 700;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
