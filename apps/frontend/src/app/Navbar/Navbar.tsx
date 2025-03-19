@@ -1,22 +1,22 @@
 import icon from '../../assets/beeNestIcon.png';
 import { NavbarLink } from './NavbarLink';
 import styles from './Navbar.module.scss';
+import { useAuth } from '../../contexts/auth';
 
-interface NavbarProps {
-    auth: boolean;
-}
+export function Navbar() {
+    const { sessionId } = useAuth();
+    const isSignedIn = sessionId !== null;
 
-export function Navbar({ auth }: NavbarProps) {
     return (
         <div className={styles.navbar}>
             <div className={styles.navbar_section}>
                 <img className={styles.icon} src={icon} alt="beeCraft-icon" />
                 <span className={styles.title}>BeeCraft</span>
-                {auth && <NavbarLink name="Worlds" />}
+                {isSignedIn && <NavbarLink name="Worlds" />}
                 <NavbarLink name="About Us" />
             </div>
             <div className={styles.navbar_section}>
-                {auth ? (
+                {isSignedIn ? (
                     <NavbarLink name="Log out" />
                 ) : (
                     <>
