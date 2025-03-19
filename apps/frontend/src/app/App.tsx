@@ -1,15 +1,17 @@
 import './global.scss';
 import { Navbar } from './Navbar';
 import { LandingPage } from './LandingPage';
-import { useAuth } from '../contexts/auth';
+import { Route, Routes } from 'react-router-dom';
+import { SignInPage } from './SignInPage';
 
 export default function App() {
-    const { sessionId } = useAuth();
-
     return (
         <>
             <Navbar />
-            {sessionId === null ? <LandingPage /> : <p>signed in!</p>}
+            <Routes>
+                <Route path="/" element={<LandingPage />} />
+                <Route path="/sign_in" element={<SignInPage />} />
+            </Routes>
         </>
     );
 }
