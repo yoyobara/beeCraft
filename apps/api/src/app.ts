@@ -10,7 +10,7 @@ import session from 'express-session';
 import userRouter from './routes/user';
 
 const app: Express = express();
-const ORIGIN = 'http://localhost:4200'
+const ORIGIN = 'http://localhost:4200';
 
 app.use(express.json());
 
@@ -21,15 +21,17 @@ app.use(
     })
 );
 
-app.use(session({
-    secret: 'my-secret',  // a secret string used to sign the session ID cookie
-    resave: false,  // don't save session if unmodified
-    saveUninitialized: false,  // don't create session until something stored
-    cookie: {
-        secure: false
-    }
-}))
+app.use(
+    session({
+        secret: 'my-secret', // a secret string used to sign the session ID cookie
+        resave: false, // don't save session if unmodified
+        saveUninitialized: false, // don't create session until something stored
+        cookie: {
+            secure: false,
+        },
+    })
+);
 
-app.use("/user", userRouter);
+app.use('/user', userRouter);
 
 export default app;
