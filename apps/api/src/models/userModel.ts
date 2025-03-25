@@ -31,7 +31,7 @@ export class User extends Model<
     @NotNull
     declare username: string;
 
-    @Attribute(DataTypes.BLOB)
+    @Attribute(DataTypes.STRING)
     @NotNull
-    declare passwordHash: Uint8Array;
+    declare passwordHash: string;
 }

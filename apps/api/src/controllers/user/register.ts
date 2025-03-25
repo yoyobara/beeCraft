@@ -1,11 +1,12 @@
 import { Request, Response } from 'express';
+import { hash } from 'bcryptjs';
 import { User } from '../../models';
+import { SALT_ROUNDS } from '../../utils/crypto';
 
 export async function register(req: Request, res: Response) {
-    const { email, username, passwordHash } = req.body;
+    const { email, username, password } = req.body;
 
     const userExists = await User.findOne({ where: { email } });
-    console.log(userExists);
     if (userExists) {
         return res
             .status(409)
@@ -14,7 +15,7 @@ export async function register(req: Request, res: Response) {
 
     const newUser = await User.create({
         email,
-        passwordHash,
+        passwordHash: await hash(password, SALT_ROUNDS),
         username,
     });
 
