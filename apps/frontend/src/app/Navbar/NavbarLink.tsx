@@ -1,14 +1,16 @@
+import { Link, To } from 'react-router-dom';
 import styles from './Navbar.module.scss';
 
 interface NavbarLinkProps {
     name: string;
-    onClick?: () => void;
+    to: To;
+    onClick?: React.MouseEventHandler<HTMLAnchorElement>;
 }
 
-export function NavbarLink({ name, onClick }: NavbarLinkProps) {
+export function NavbarLink({ name, to, onClick }: NavbarLinkProps) {
     return (
-        <button onClick={onClick} className={styles.navbar_link}>
+        <Link to={to} className={styles.navbar_link} onClick={onClick}>
             {name}
-        </button>
+        </Link>
     );
 }
