@@ -3,6 +3,7 @@ import { Navbar } from './Navbar';
 import { LandingPage } from './LandingPage';
 import { Route, Routes } from 'react-router-dom';
 import { SignInPage } from './SignInPage';
+import { SignUpPage } from './SignUpPage';
 
 export default function App() {
     return (
@@ -11,6 +12,7 @@ export default function App() {
             <Routes>
                 <Route path="/" element={<LandingPage />} />
                 <Route path="/sign_in" element={<SignInPage />} />
+                <Route path="/sign_up" element={<SignUpPage />} />
             </Routes>
         </>
     );

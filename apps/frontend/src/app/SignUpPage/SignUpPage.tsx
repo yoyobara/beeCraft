@@ -3,24 +3,33 @@ import { useState } from 'react';
 import { useAuth } from '../../hooks/auth';
 import { useNavigate } from 'react-router-dom';
 
-export function SignInPage() {
+export function SignUpPage() {
+    const [email, setEmail] = useState<string>('');
+    const [username, setUsername] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const [confirmPassword, setConfirmPassword] = useState<string>('');
+
     const { setIsLoggedIn } = useAuth();
     const navigate = useNavigate();
 
-    const [email, setEmail] = useState<string>('');
-    const [password, setPassword] = useState<string>('');
-
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        if (password !== confirmPassword) {
+            console.log('password not matching confirm');
+            return;
+        }
+
         try {
             await axios.post(
-                'http://localhost:3333/user/login',
+                'http://localhost:3333/user/register',
                 {
                     email,
+                    username,
                     password,
                 },
                 { withCredentials: true }
             );
+
             setIsLoggedIn(true);
             navigate('/');
         } catch (e) {
@@ -44,10 +53,27 @@ export function SignInPage() {
                 </div>
                 <div>
                     <input
+                        type="text"
+                        required
+                        placeholder="username"
+                        onChange={(e) => setUsername(e.target.value)}
+                    />
+                </div>
+                <div>
+                    <input
                         type="password"
                         required
                         placeholder="password"
                         onChange={(e) => setPassword(e.target.value)}
+                    />
+                </div>
+                <div>
+                    <input
+                        type="password"
+                        required
+                        placeholder="confirm password"
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        onPaste={(e) => e.preventDefault()}
                     />
                 </div>
                 <div>
