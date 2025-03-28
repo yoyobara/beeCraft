@@ -4,11 +4,12 @@ import styles from './Navbar.module.scss';
 interface NavbarLinkProps {
     name: string;
     to: To;
+    onClick?: React.MouseEventHandler<HTMLAnchorElement>;
 }
 
-export function NavbarLink({ name, to }: NavbarLinkProps) {
+export function NavbarLink({ name, to, onClick }: NavbarLinkProps) {
     return (
-        <Link to={to} className={styles.navbar_link}>
+        <Link to={to} className={styles.navbar_link} onClick={onClick}>
             {name}
         </Link>
     );

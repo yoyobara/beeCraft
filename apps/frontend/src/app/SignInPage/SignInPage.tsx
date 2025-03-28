@@ -1,12 +1,33 @@
+import axios from 'axios';
 import { useState } from 'react';
+import { useAuth } from '../../hooks/auth';
+import { useNavigate } from 'react-router-dom';
 
 export function SignInPage() {
+    const { setIsLoggedIn } = useAuth();
+    const navigate = useNavigate();
+
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log('attempting sign in with', email, password);
+        try {
+            await axios.post(
+                'http://localhost:3333/user/login',
+                {
+                    email,
+                    password,
+                },
+                { withCredentials: true }
+            );
+            setIsLoggedIn(true);
+            navigate('/');
+        } catch (e: unknown) {
+            if (axios.isAxiosError(e)) {
+                console.log(e);
+            }
+        }
     };
 
     return (
