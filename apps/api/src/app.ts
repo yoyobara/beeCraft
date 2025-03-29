@@ -1,8 +1,3 @@
-/**
- * This is not a production server yet!
- * This is only a minimal backend to get started.
- */
-
 import express, { Express } from 'express';
 import cors from 'cors';
 import session from 'express-session';
