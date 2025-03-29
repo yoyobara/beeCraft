@@ -29,7 +29,7 @@ export class User extends Model<
 
     @Attribute(DataTypes.STRING)
     @NotNull
-    declare username: string;
+    declare fullName: string;
 
     @Attribute(DataTypes.STRING)
     @NotNull

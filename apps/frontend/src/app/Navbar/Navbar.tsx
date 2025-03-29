@@ -4,7 +4,7 @@ import styles from './Navbar.module.scss';
 import { useAuth } from '../../hooks/auth';
 
 export function Navbar() {
-    const { username, isLoggedIn, setIsLoggedIn } = useAuth();
+    const { fullName, isLoggedIn, setIsLoggedIn } = useAuth();
 
     const handleLogout = () => {
         setIsLoggedIn(false);
@@ -21,7 +21,7 @@ export function Navbar() {
             <div className={styles.navbar_section}>
                 {isLoggedIn ? (
                     <>
-                        <span>hello {username}</span>
+                        <span>hello {fullName}</span>
                         <NavbarLink
                             name="Log out"
                             to="/"

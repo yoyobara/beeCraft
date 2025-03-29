@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 export function SignUpPage() {
     const [email, setEmail] = useState<string>('');
-    const [username, setUsername] = useState<string>('');
+    const [fullName, setFullName] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [confirmPassword, setConfirmPassword] = useState<string>('');
 
@@ -24,7 +24,7 @@ export function SignUpPage() {
                 'http://localhost:3333/user/register',
                 {
                     email,
-                    username,
+                    fullName,
                     password,
                 },
                 { withCredentials: true }
@@ -55,8 +55,8 @@ export function SignUpPage() {
                     <input
                         type="text"
                         required
-                        placeholder="username"
-                        onChange={(e) => setUsername(e.target.value)}
+                        placeholder="full name"
+                        onChange={(e) => setFullName(e.target.value)}
                     />
                 </div>
                 <div>

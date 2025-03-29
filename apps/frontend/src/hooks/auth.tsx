@@ -8,7 +8,7 @@ import {
 } from 'react';
 
 interface Auth {
-    username: string | null;
+    fullName: string | null;
     isLoggedIn: boolean;
     setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -17,7 +17,7 @@ const AuthContext = createContext<Auth | undefined>(undefined);
 
 export function AuthProvider({ children }: PropsWithChildren) {
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-    const [username, setUsername] = useState<string | null>(null);
+    const [fullName, setFullName] = useState<string | null>(null);
 
     useEffect(() => {
         const checkSession = async () => {
@@ -25,7 +25,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
                 withCredentials: true,
             });
 
-            setUsername(info.data.username);
+            setFullName(info.data.fullName);
         };
 
         if (isLoggedIn) {
@@ -34,7 +34,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
     }, [isLoggedIn]);
 
     return (
-        <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn, username }}>
+        <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn, fullName }}>
             {children}
         </AuthContext.Provider>
     );

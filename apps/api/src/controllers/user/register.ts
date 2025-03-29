@@ -4,7 +4,7 @@ import { User } from '../../models';
 import { SALT_ROUNDS } from '../../utils/crypto';
 
 export async function register(req: Request, res: Response) {
-    const { email, username, password } = req.body;
+    const { email, fullName, password } = req.body;
 
     const userExists = await User.findOne({ where: { email } });
     if (userExists) {
@@ -16,7 +16,7 @@ export async function register(req: Request, res: Response) {
     const newUser = await User.create({
         email,
         passwordHash: await hash(password, SALT_ROUNDS),
-        username,
+        fullName: fullName,
     });
 
     req.session.loggedInUserId = newUser.id;

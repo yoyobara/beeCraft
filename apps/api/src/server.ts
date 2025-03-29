@@ -11,7 +11,7 @@ async function startServer() {
         email: 'yotam@gmail.com',
         passwordHash:
             '$2y$11$b6wd6aDR/LZ5XIUv8TtX1.V9BWO1uNHK6iEFqOyXacMJnnt0eyqnu',
-        username: 'yoyobara',
+        fullName: 'yoyobara',
     });
 
     app.listen(PORT, () => {
