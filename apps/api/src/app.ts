@@ -23,11 +23,13 @@ app.use(
 
 app.use(
     session({
-        secret: 'my-secret', // a secret string used to sign the session ID cookie
-        resave: false, // don't save session if unmodified
-        saveUninitialized: false, // don't create session until something stored
+        secret: 'my-secret',
+        resave: false,
+        saveUninitialized: false,
         cookie: {
             secure: false,
+            httpOnly: true,
+            maxAge: 24 * 60 * 60 * 1000,
         },
     })
 );
