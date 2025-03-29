@@ -1,9 +1,11 @@
 import {
     CreationOptional,
     DataTypes,
+    HasManyGetAssociationsMixin,
     InferAttributes,
     InferCreationAttributes,
     Model,
+    NonAttribute,
 } from '@sequelize/core';
 import {
     Attribute,
@@ -11,7 +13,9 @@ import {
     AutoIncrement,
     Unique,
     NotNull,
+    HasMany,
 } from '@sequelize/core/decorators-legacy';
+import { World } from './worldModel';
 
 export class User extends Model<
     InferAttributes<User>,
@@ -34,4 +38,14 @@ export class User extends Model<
     @Attribute(DataTypes.STRING)
     @NotNull
     declare passwordHash: string;
+
+    @HasMany(() => World, {
+        foreignKey: 'userId',
+        inverse: {
+            as: 'author',
+        },
+    })
+    declare worlds: NonAttribute<World>;
+
+    declare getPosts: HasManyGetAssociationsMixin<World>;
 }
