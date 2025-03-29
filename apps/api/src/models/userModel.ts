@@ -46,6 +46,5 @@ export class User extends Model<
         },
     })
     declare worlds: NonAttribute<World>;
-
-    declare getPosts: HasManyGetAssociationsMixin<World>;
+    declare getWorlds: HasManyGetAssociationsMixin<World>;
 }

@@ -6,6 +6,8 @@ import {
     CreationOptional,
     ForeignKey,
     NonAttribute,
+    HasManyGetAssociationsMixin,
+    BelongsToGetAssociationMixin,
 } from '@sequelize/core';
 import {
     PrimaryKey,
@@ -13,8 +15,10 @@ import {
     NotNull,
     Unique,
     Attribute,
+    HasMany,
 } from '@sequelize/core/decorators-legacy';
 import { User } from './userModel';
+import { PointOfInterest } from './pointOfInterestModel';
 
 export class World extends Model<
     InferAttributes<World>,
@@ -34,4 +38,14 @@ export class World extends Model<
     declare userId: ForeignKey<User['id']>;
 
     declare user: NonAttribute<User>;
+    declare getUser: BelongsToGetAssociationMixin<User>;
+
+    @HasMany(() => PointOfInterest, {
+        foreignKey: 'worldId',
+        inverse: {
+            as: 'world',
+        },
+    })
+    declare points: NonAttribute<PointOfInterest>;
+    declare getPoints: HasManyGetAssociationsMixin<PointOfInterest>;
 }
