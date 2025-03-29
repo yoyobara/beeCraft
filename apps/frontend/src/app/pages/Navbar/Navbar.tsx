@@ -1,7 +1,7 @@
-import icon from '../../assets/beeNestIcon.png';
+import icon from '../../../assets/beeNestIcon.png';
 import { NavbarLink } from './NavbarLink';
 import styles from './Navbar.module.scss';
-import { useAuth } from '../../hooks/auth';
+import { useAuth } from '../../../hooks/auth';
 
 export function Navbar() {
     const { fullName, isLoggedIn, setIsLoggedIn } = useAuth();

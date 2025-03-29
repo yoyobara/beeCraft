@@ -1,9 +1,9 @@
 import './global.scss';
-import { Navbar } from './Navbar';
-import { LandingPage } from './LandingPage';
+import { Navbar } from './pages/Navbar';
+import { LandingPage } from './pages/LandingPage';
 import { Route, Routes } from 'react-router-dom';
-import { SignInPage } from './SignInPage';
-import { SignUpPage } from './SignUpPage';
+import { SignInPage } from './pages/SignInPage';
+import { SignUpPage } from './pages/SignUpPage';
 
 export default function App() {
     return (
