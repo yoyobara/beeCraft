@@ -1,7 +1,7 @@
 import Sequelize from '@sequelize/core';
 import { SqliteDialect } from '@sequelize/sqlite3';
 
-import { User } from '../models';
+import { User, World, PointOfInterest } from '../models';
 
 const sequelize = new Sequelize({
     dialect: SqliteDialect,
@@ -11,7 +11,7 @@ const sequelize = new Sequelize({
         max: 1,
         idle: Infinity,
     },
-    models: [User],
+    models: [User, World, PointOfInterest],
 });
 
 export default sequelize;
