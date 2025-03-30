@@ -1,4 +1,4 @@
-import './global.scss';
+import '../global.scss';
 import { Navbar } from './Navbar';
 import { LandingPage } from './LandingPage';
 import { Route, Routes } from 'react-router-dom';

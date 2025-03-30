@@ -1,6 +1,9 @@
+@use "../../global.scss" as *;
+
 .navbar {
     height: 70px;
-    background-color: lightblue;
+    background-color: $bg-light;
+    border-bottom: 5px solid $border;
 
     display: flex;
     justify-content: space-between;
@@ -20,7 +23,7 @@
 }
 
 .title {
-    font-size: 60px;
+    font-size: 3rem;
     font-weight: 300;
 }
 

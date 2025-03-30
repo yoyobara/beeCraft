@@ -1,7 +1,7 @@
 import icon from '../../assets/beeNestIcon.png';
-import { NavbarLink } from './NavbarLink';
 import styles from './Navbar.module.scss';
 import { useAuth } from '../../hooks/auth';
+import { Button } from '../../components/Button';
 
 export function Navbar() {
     const { fullName, isLoggedIn, setIsLoggedIn } = useAuth();
@@ -15,23 +15,35 @@ export function Navbar() {
             <div className={styles.navbar_section}>
                 <img className={styles.icon} src={icon} alt="beeCraft-icon" />
                 <span className={styles.title}>BeeCraft</span>
-                {isLoggedIn && <NavbarLink name="Worlds" to="/worlds" />}
-                <NavbarLink name="About Us" to="/about" />
+                {isLoggedIn && (
+                    <Button variant="primary" kind="contained">
+                        WORLDS
+                    </Button>
+                )}
+                <Button variant="primary" kind="contained">
+                    ABOUT US
+                </Button>
             </div>
             <div className={styles.navbar_section}>
                 {isLoggedIn ? (
                     <>
                         <span>hello {fullName}</span>
-                        <NavbarLink
-                            name="Log out"
-                            to="/"
+                        <Button
+                            variant="secondary"
+                            kind="outlined"
                             onClick={handleLogout}
-                        />
+                        >
+                            LOG OUT
+                        </Button>
                     </>
                 ) : (
                     <>
-                        <NavbarLink name="Sign In" to="/sign_in" />
-                        <NavbarLink name="Sign Up" to="/sign_up" />
+                        <Button variant="accent" kind="contained">
+                            SIGN IN
+                        </Button>
+                        <Button variant="accent" kind="outlined">
+                            SIGN UP
+                        </Button>
                     </>
                 )}
             </div>

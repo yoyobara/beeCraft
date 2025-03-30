@@ -1,0 +1,35 @@
+@use "../../global.scss" as *;
+
+@mixin button_style($color, $text-color) {
+	background-color: $color;
+	color: $text-color;
+
+
+	&.outlined {
+		background-color: transparent;
+		border: 2px solid $color;
+		color: $color;
+	}
+}
+
+.button {
+	border: none;
+	border-radius: 4px;
+	padding: 3px 5px;
+
+	&:hover {
+		opacity: 0.8;
+	}
+
+	&.primary {
+		@include button_style($primary, $text-primary);
+	}
+
+	&.secondary {
+		@include button_style($secondary, $text-secondary);
+	}
+
+	&.accent {
+		@include button_style($accent, $text-primary);
+	}
+}
