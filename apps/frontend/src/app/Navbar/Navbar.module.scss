@@ -1,20 +1,15 @@
 @use "../../global.scss" as *;
 
 .navbar {
-    height: 70px;
+    height: 8%;
     background-color: $bg-light;
     border-bottom: 5px solid $border;
 
     display: flex;
-    justify-content: space-between;
-    gap: 25px;
-    padding: 8px 20px;
-}
-
-.navbar_section {
-    display: flex;
+    column-gap: 2%;
     align-items: center;
-    gap: 30px;
+    justify-content: space-between;
+    padding: 1%;
 }
 
 .icon {
@@ -22,18 +17,11 @@
     width: auto;
 }
 
-.title {
-    font-size: 3rem;
-    font-weight: 300;
+.about {
+    margin-right: auto;
 }
 
-.navbar_link {
-    font-size: 20px;
-    font-weight: 700;
-    color: black;
-    text-decoration: none;
-
-    &:hover {
-        text-decoration: underline;
-    }
+.title {
+    font-weight: 300;
+    font-size: 5em;
 }
