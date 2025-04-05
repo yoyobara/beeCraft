@@ -9,32 +9,34 @@ import {
 
 interface Auth {
     fullName: string | null;
-    isLoggedIn: boolean;
-    setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
+    isLoading: boolean;
+    refreshAuth: () => void;
 }
 
 const AuthContext = createContext<Auth | undefined>(undefined);
 
 export function AuthProvider({ children }: PropsWithChildren) {
-    const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
     const [fullName, setFullName] = useState<string | null>(null);
 
+    const refreshAuth = async () => {
+        setIsLoading(true);
+
+        const info = await axios.get('http://localhost:3333/user/info', {
+            withCredentials: true,
+            validateStatus: (status) => status === 200 || status === 401,
+        });
+
+        setFullName(info.status === 200 ? info.data.fullName : null);
+        setIsLoading(false);
+    };
+
     useEffect(() => {
-        const checkSession = async () => {
-            const info = await axios.get('http://localhost:3333/user/info', {
-                withCredentials: true,
-            });
-
-            setFullName(info.data.fullName);
-        };
-
-        if (isLoggedIn) {
-            checkSession();
-        }
-    }, [isLoggedIn]);
+        refreshAuth();
+    }, []);
 
     return (
-        <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn, fullName }}>
+        <AuthContext.Provider value={{ fullName, isLoading, refreshAuth }}>
             {children}
         </AuthContext.Provider>
     );

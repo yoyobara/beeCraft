@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
-import { useAuth } from '../../hooks/auth';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../hooks/auth';
 
 export function SignUpPage() {
     const [email, setEmail] = useState<string>('');
@@ -9,8 +9,8 @@ export function SignUpPage() {
     const [password, setPassword] = useState<string>('');
     const [confirmPassword, setConfirmPassword] = useState<string>('');
 
-    const { setIsLoggedIn } = useAuth();
     const navigate = useNavigate();
+    const { refreshAuth } = useAuth();
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -30,8 +30,8 @@ export function SignUpPage() {
                 { withCredentials: true }
             );
 
-            setIsLoggedIn(true);
             navigate('/');
+            refreshAuth();
         } catch (e) {
             if (axios.isAxiosError(e)) {
                 console.log(e);

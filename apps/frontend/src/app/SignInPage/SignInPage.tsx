@@ -1,10 +1,10 @@
 import axios from 'axios';
 import { useState } from 'react';
-import { useAuth } from '../../hooks/auth';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../hooks/auth';
 
 export function SignInPage() {
-    const { setIsLoggedIn } = useAuth();
+    const { refreshAuth } = useAuth();
     const navigate = useNavigate();
 
     const [email, setEmail] = useState<string>('');
@@ -12,22 +12,16 @@ export function SignInPage() {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        try {
-            await axios.post(
-                'http://localhost:3333/user/login',
-                {
-                    email,
-                    password,
-                },
-                { withCredentials: true }
-            );
-            setIsLoggedIn(true);
-            navigate('/');
-        } catch (e) {
-            if (axios.isAxiosError(e)) {
-                console.log(e);
-            }
-        }
+        await axios.post(
+            'http://localhost:3333/user/login',
+            {
+                email,
+                password,
+            },
+            { withCredentials: true }
+        );
+        navigate('/');
+        refreshAuth();
     };
 
     return (
