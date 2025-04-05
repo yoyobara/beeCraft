@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/auth';
+import { Field } from '../../components/Field';
 
 export function SignUpPage() {
     const [email, setEmail] = useState<string>('');
@@ -46,7 +47,7 @@ export function SignUpPage() {
             <h1>Login</h1>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <input
+                    <Field
                         type="email"
                         required
                         placeholder="email"
@@ -54,7 +55,7 @@ export function SignUpPage() {
                     />
                 </div>
                 <div>
-                    <input
+                    <Field
                         type="text"
                         required
                         placeholder="full name"
@@ -62,7 +63,7 @@ export function SignUpPage() {
                     />
                 </div>
                 <div>
-                    <input
+                    <Field
                         type="password"
                         required
                         placeholder="password"
@@ -70,7 +71,7 @@ export function SignUpPage() {
                     />
                 </div>
                 <div>
-                    <input
+                    <Field
                         type="password"
                         required
                         placeholder="confirm password"
@@ -79,7 +80,7 @@ export function SignUpPage() {
                     />
                 </div>
                 <div>
-                    <input type="submit" value="Sign In" />
+                    <Field type="submit" value="Sign In" />
                 </div>
             </form>
         </div>
