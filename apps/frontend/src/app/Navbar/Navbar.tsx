@@ -3,21 +3,34 @@ import styles from './Navbar.module.scss';
 import { useAuth } from '../../hooks/auth';
 import { Button } from '../../components/Button';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 export function Navbar() {
-    const { fullName, isLoggedIn, setIsLoggedIn } = useAuth();
+    const { fullName, isLoading, refreshAuth } = useAuth();
     const navgiate = useNavigate();
 
-    const handleLogout = () => {
-        setIsLoggedIn(false);
+    const handleLogout = async () => {
+        await axios.post(
+            'http://localhost:3333/user/logout',
+            {},
+            {
+                withCredentials: true,
+            }
+        );
+
         navgiate('/');
+        refreshAuth();
     };
+
+    if (isLoading) {
+        return <div className={styles.navbar}></div>;
+    }
 
     return (
         <div className={styles.navbar}>
             <img className={styles.icon} src={icon} alt="beeCraft-icon" />
             <span className={styles.title}>BeeCraft</span>
-            {isLoggedIn && (
+            {fullName && (
                 <Button variant="primary" kind="contained">
                     WORLDS
                 </Button>
@@ -25,7 +38,7 @@ export function Navbar() {
             <Button className={styles.about} variant="primary" kind="contained">
                 ABOUT US
             </Button>
-            {isLoggedIn ? (
+            {fullName ? (
                 <>
                     <span>hello {fullName}</span>
                     <Button

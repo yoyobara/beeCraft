@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
-import { useAuth } from '../../hooks/auth';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../hooks/auth';
 
 export function SignUpPage() {
     const [email, setEmail] = useState<string>('');
@@ -9,33 +9,35 @@ export function SignUpPage() {
     const [password, setPassword] = useState<string>('');
     const [confirmPassword, setConfirmPassword] = useState<string>('');
 
-    const { setIsLoggedIn } = useAuth();
     const navigate = useNavigate();
+    const { refreshAuth } = useAuth();
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
         if (password !== confirmPassword) {
             console.log('password not matching confirm');
             return;
         }
 
-        try {
-            await axios.post(
-                'http://localhost:3333/user/register',
-                {
-                    email,
-                    fullName,
-                    password,
-                },
-                { withCredentials: true }
-            );
-
-            setIsLoggedIn(true);
-            navigate('/');
-        } catch (e) {
-            if (axios.isAxiosError(e)) {
-                console.log(e);
+        const { status } = await axios.post(
+            'http://localhost:3333/user/register',
+            {
+                email,
+                fullName,
+                password,
+            },
+            {
+                withCredentials: true,
+                validateStatus: (status) => [200, 409].includes(status),
             }
+        );
+
+        if (status === 200) {
+            navigate('/');
+            refreshAuth();
+        } else {
+            console.log('signup bad');
         }
     };
 
