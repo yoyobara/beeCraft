@@ -46,6 +46,7 @@ export function SignUpPage() {
             <h1>Login</h1>
             <div>
                 <Field
+                    variant="primary"
                     type="email"
                     required
                     placeholder="email"
@@ -54,6 +55,7 @@ export function SignUpPage() {
             </div>
             <div>
                 <Field
+                    variant="primary"
                     type="text"
                     required
                     placeholder="full name"
@@ -62,6 +64,7 @@ export function SignUpPage() {
             </div>
             <div>
                 <Field
+                    variant="primary"
                     type="password"
                     required
                     placeholder="password"
@@ -70,6 +73,7 @@ export function SignUpPage() {
             </div>
             <div>
                 <Field
+                    variant="primary"
                     type="password"
                     required
                     placeholder="confirm password"

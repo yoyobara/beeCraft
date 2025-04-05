@@ -1,2 +1,27 @@
 @use "../../global.scss" as *;
 
+@mixin input_color($color) {
+	border-color: $color;
+}
+
+.input {
+	font-size: 1em;
+	padding: 0.5%;
+
+	border-radius: 5px;
+	border-width: 3px;
+	border-style: groove;
+	outline: none;
+
+	&.primary {
+		@include input_color($primary);
+	}
+
+	&.secondary {
+		@include input_color($secondary);
+	}
+
+	&.accent {
+		@include input_color($accent);
+	}
+}

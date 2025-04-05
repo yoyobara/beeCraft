@@ -40,6 +40,7 @@ export function SignInPage() {
             <h1>Login</h1>
             <div>
                 <Field
+                    variant="primary"
                     type="email"
                     required
                     placeholder="email"
@@ -48,6 +49,7 @@ export function SignInPage() {
             </div>
             <div>
                 <Field
+                    variant="primary"
                     type="password"
                     required
                     placeholder="password"
