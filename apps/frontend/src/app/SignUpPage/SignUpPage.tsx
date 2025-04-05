@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/auth';
 import { Field } from '../../components/Field';
+import { Button } from '../../components/Button';
 
 export function SignUpPage() {
     const [email, setEmail] = useState<string>('');
@@ -13,9 +14,7 @@ export function SignUpPage() {
     const navigate = useNavigate();
     const { refreshAuth } = useAuth();
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-
+    const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
         if (password !== confirmPassword) {
             console.log('password not matching confirm');
             return;
@@ -45,44 +44,44 @@ export function SignUpPage() {
     return (
         <div style={{ textAlign: 'center' }}>
             <h1>Login</h1>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <Field
-                        type="email"
-                        required
-                        placeholder="email"
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <Field
-                        type="text"
-                        required
-                        placeholder="full name"
-                        onChange={(e) => setFullName(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <Field
-                        type="password"
-                        required
-                        placeholder="password"
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <Field
-                        type="password"
-                        required
-                        placeholder="confirm password"
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                        onPaste={(e) => e.preventDefault()}
-                    />
-                </div>
-                <div>
-                    <Field type="submit" value="Sign In" />
-                </div>
-            </form>
+            <div>
+                <Field
+                    type="email"
+                    required
+                    placeholder="email"
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+            </div>
+            <div>
+                <Field
+                    type="text"
+                    required
+                    placeholder="full name"
+                    onChange={(e) => setFullName(e.target.value)}
+                />
+            </div>
+            <div>
+                <Field
+                    type="password"
+                    required
+                    placeholder="password"
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+            </div>
+            <div>
+                <Field
+                    type="password"
+                    required
+                    placeholder="confirm password"
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    onPaste={(e) => e.preventDefault()}
+                />
+            </div>
+            <div>
+                <Button variant="accent" kind="outlined" onClick={handleSubmit}>
+                    SIGN UP
+                </Button>
+            </div>
         </div>
     );
 }
