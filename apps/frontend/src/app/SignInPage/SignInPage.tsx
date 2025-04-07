@@ -1,4 +1,5 @@
 import axios from 'axios';
+import styles from './SignInPage.module.scss';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/auth';
@@ -23,7 +24,7 @@ export function SignInPage() {
             },
             {
                 withCredentials: true,
-                validateStatus: (status) => [200, 404].includes(status),
+                validateStatus: (status) => [200, 401, 404].includes(status),
             }
         );
 
@@ -36,31 +37,30 @@ export function SignInPage() {
     };
 
     return (
-        <div style={{ textAlign: 'center' }}>
-            <h1>Login</h1>
-            <div>
-                <Field
-                    variant="primary"
-                    type="email"
-                    required
-                    placeholder="email"
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-            </div>
-            <div>
-                <Field
-                    variant="primary"
-                    type="password"
-                    required
-                    placeholder="password"
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-            </div>
-            <div>
-                <Button variant="accent" kind="outlined" onClick={handleSubmit}>
-                    SIGN IN
-                </Button>
-            </div>
+        <div className={styles.sign_in}>
+            <h1>SIGN IN</h1>
+            <Field
+                variant="primary"
+                type="email"
+                placeholder="email"
+                className={styles.input}
+                onChange={(e) => setEmail(e.target.value)}
+            />
+            <Field
+                variant="primary"
+                type="password"
+                placeholder="password"
+                className={styles.input}
+                onChange={(e) => setPassword(e.target.value)}
+            />
+            <Button
+                variant="primary"
+                kind="contained"
+                className={styles.submit}
+                onClick={handleSubmit}
+            >
+                SIGN IN
+            </Button>
         </div>
     );
 }

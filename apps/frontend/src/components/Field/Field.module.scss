@@ -6,9 +6,9 @@
 
 .input {
 	font-size: 1em;
-	padding: 0.5%;
+	padding: 2%;
 
-	border-radius: 5px;
+	border-radius: 20px;
 	border-width: 3px;
 	border-style: groove;
 	outline: none;
@@ -23,5 +23,13 @@
 
 	&.accent {
 		@include input_color($accent);
+	}
+	
+	&::placeholder {
+		color: lightgray;
+	}
+
+	&:focus::placeholder {
+		opacity: 0;
 	}
 }

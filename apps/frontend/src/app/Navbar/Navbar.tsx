@@ -31,21 +31,17 @@ export function Navbar() {
             <img className={styles.icon} src={icon} alt="beeCraft-icon" />
             <span className={styles.title}>BeeCraft</span>
             {fullName && (
-                <Button variant="primary" kind="text">
+                <Button variant="accent" kind="text">
                     WORLDS
                 </Button>
             )}
-            <Button className={styles.about} variant="primary" kind="text">
+            <Button className={styles.about} variant="accent" kind="text">
                 ABOUT US
             </Button>
             {fullName ? (
                 <>
                     <span>hello {fullName}</span>
-                    <Button
-                        variant="secondary"
-                        kind="text"
-                        onClick={handleLogout}
-                    >
+                    <Button variant="accent" kind="text" onClick={handleLogout}>
                         LOG OUT
                     </Button>
                 </>

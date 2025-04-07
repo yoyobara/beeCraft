@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import styles from './SignUpPage.module.scss';
 import { useAuth } from '../../hooks/auth';
 import { Field } from '../../components/Field';
 import { Button } from '../../components/Button';
@@ -42,50 +43,45 @@ export function SignUpPage() {
     };
 
     return (
-        <div style={{ textAlign: 'center' }}>
-            <h1>Login</h1>
-            <div>
-                <Field
-                    variant="primary"
-                    type="email"
-                    required
-                    placeholder="email"
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-            </div>
-            <div>
-                <Field
-                    variant="primary"
-                    type="text"
-                    required
-                    placeholder="full name"
-                    onChange={(e) => setFullName(e.target.value)}
-                />
-            </div>
-            <div>
-                <Field
-                    variant="primary"
-                    type="password"
-                    required
-                    placeholder="password"
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-            </div>
-            <div>
-                <Field
-                    variant="primary"
-                    type="password"
-                    required
-                    placeholder="confirm password"
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    onPaste={(e) => e.preventDefault()}
-                />
-            </div>
-            <div>
-                <Button variant="accent" kind="outlined" onClick={handleSubmit}>
-                    SIGN UP
-                </Button>
-            </div>
+        <div className={styles.signup}>
+            <h1>SIGN UP</h1>
+            <Field
+                variant="primary"
+                type="email"
+                placeholder="email"
+                className={styles.input}
+                onChange={(e) => setEmail(e.target.value)}
+            />
+            <Field
+                variant="primary"
+                type="text"
+                placeholder="full name"
+                className={styles.input}
+                onChange={(e) => setFullName(e.target.value)}
+            />
+            <Field
+                variant="primary"
+                type="password"
+                placeholder="password"
+                className={styles.input}
+                onChange={(e) => setPassword(e.target.value)}
+            />
+            <Field
+                variant="primary"
+                type="password"
+                placeholder="confirm password"
+                className={styles.input}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                onPaste={(e) => e.preventDefault()}
+            />
+            <Button
+                variant="primary"
+                kind="contained"
+                onClick={handleSubmit}
+                className={styles.submit}
+            >
+                SIGN UP
+            </Button>
         </div>
     );
 }
