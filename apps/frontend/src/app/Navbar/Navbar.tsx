@@ -31,11 +31,11 @@ export function Navbar() {
             <img className={styles.icon} src={icon} alt="beeCraft-icon" />
             <span className={styles.title}>BeeCraft</span>
             {fullName && (
-                <Button variant="primary" kind="contained">
+                <Button variant="primary" kind="text">
                     WORLDS
                 </Button>
             )}
-            <Button className={styles.about} variant="primary" kind="contained">
+            <Button className={styles.about} variant="primary" kind="text">
                 ABOUT US
             </Button>
             {fullName ? (
@@ -43,7 +43,7 @@ export function Navbar() {
                     <span>hello {fullName}</span>
                     <Button
                         variant="secondary"
-                        kind="outlined"
+                        kind="text"
                         onClick={handleLogout}
                     >
                         LOG OUT
@@ -53,7 +53,7 @@ export function Navbar() {
                 <>
                     <Button
                         variant="accent"
-                        kind="contained"
+                        kind="text"
                         onClick={() => {
                             navgiate('/sign_in');
                         }}
@@ -62,7 +62,7 @@ export function Navbar() {
                     </Button>
                     <Button
                         variant="accent"
-                        kind="outlined"
+                        kind="text"
                         onClick={() => {
                             navgiate('/sign_up');
                         }}

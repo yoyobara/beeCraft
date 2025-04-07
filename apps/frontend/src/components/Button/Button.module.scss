@@ -10,6 +10,13 @@
 		border: 2px solid $color;
 		color: $color;
 	}
+
+	&.text {
+		background-color: transparent;
+		border: none;
+		color: $text-color;
+		font-weight: bolder;
+	}
 }
 
 .button {

@@ -4,7 +4,7 @@ import React from 'react';
 
 interface ButtonProps extends React.InputHTMLAttributes<HTMLButtonElement> {
     variant: 'primary' | 'secondary' | 'accent';
-    kind: 'contained' | 'outlined';
+    kind: 'contained' | 'outlined' | 'text';
 }
 
 export function Button({ variant, kind, className, children }: ButtonProps) {
