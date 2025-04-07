@@ -12,12 +12,14 @@ export function SignUpPage() {
     const [password, setPassword] = useState<string>('');
     const [confirmPassword, setConfirmPassword] = useState<string>('');
 
+    const [errorMsg, setErrorMsg] = useState<string | null>(null);
+
     const navigate = useNavigate();
     const { refreshAuth } = useAuth();
 
     const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
         if (password !== confirmPassword) {
-            console.log('password not matching confirm');
+            setErrorMsg('passwords do not match!');
             return;
         }
 
@@ -38,7 +40,7 @@ export function SignUpPage() {
             navigate('/');
             refreshAuth();
         } else {
-            console.log('signup bad');
+            setErrorMsg('passwords do not match!');
         }
     };
 
@@ -47,33 +49,48 @@ export function SignUpPage() {
             <h1>SIGN UP</h1>
             <Field
                 variant="primary"
-                type="email"
+                type="text"
                 placeholder="email"
                 className={styles.input}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => {
+                    setEmail(e.target.value);
+                    setErrorMsg(null);
+                }}
             />
             <Field
                 variant="primary"
                 type="text"
                 placeholder="full name"
                 className={styles.input}
-                onChange={(e) => setFullName(e.target.value)}
+                onChange={(e) => {
+                    setFullName(e.target.value);
+                    setErrorMsg(null);
+                }}
             />
             <Field
                 variant="primary"
                 type="password"
                 placeholder="password"
                 className={styles.input}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => {
+                    setPassword(e.target.value);
+                    setErrorMsg(null);
+                }}
             />
             <Field
                 variant="primary"
                 type="password"
                 placeholder="confirm password"
                 className={styles.input}
-                onChange={(e) => setConfirmPassword(e.target.value)}
+                onChange={(e) => {
+                    setConfirmPassword(e.target.value);
+                    setErrorMsg(null);
+                }}
                 onPaste={(e) => e.preventDefault()}
             />
+            {errorMsg && (
+                <span className={styles.error_message}>{errorMsg}</span>
+            )}
             <Button
                 variant="primary"
                 kind="contained"

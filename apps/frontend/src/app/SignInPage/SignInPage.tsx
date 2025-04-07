@@ -12,11 +12,12 @@ export function SignInPage() {
 
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
+    const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
     const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
 
-        const { status } = await axios.post(
+        const { status, data } = await axios.post(
             'http://localhost:3333/user/login',
             {
                 email,
@@ -32,7 +33,7 @@ export function SignInPage() {
             navigate('/');
             refreshAuth();
         } else {
-            console.log('bad login');
+            setErrorMsg(data.message);
         }
     };
 
@@ -53,6 +54,9 @@ export function SignInPage() {
                 className={styles.input}
                 onChange={(e) => setPassword(e.target.value)}
             />
+            {errorMsg && (
+                <span className={styles.error_message}>{errorMsg}</span>
+            )}
             <Button
                 variant="primary"
                 kind="contained"
