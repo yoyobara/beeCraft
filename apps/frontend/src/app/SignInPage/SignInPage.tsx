@@ -1,7 +1,10 @@
 import axios from 'axios';
+import styles from './SignInPage.module.scss';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/auth';
+import { Field } from '../../components/Field';
+import { Button } from '../../components/Button';
 
 export function SignInPage() {
     const { refreshAuth } = useAuth();
@@ -9,11 +12,33 @@ export function SignInPage() {
 
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
+    const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    const validate = (): { ok: true } | { ok: false; msg: string } => {
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            return { ok: false, msg: 'please enter a valid email.' };
+        }
+
+        if (password.length < 8) {
+            return {
+                ok: false,
+                msg: 'password length must be 8 characters or more.',
+            };
+        }
+
+        return { ok: true };
+    };
+
+    const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
 
-        const { status } = await axios.post(
+        const formValidation = validate();
+        if (!formValidation.ok) {
+            setErrorMsg(formValidation.msg);
+            return;
+        }
+
+        const { status, data } = await axios.post(
             'http://localhost:3333/user/login',
             {
                 email,
@@ -21,7 +46,7 @@ export function SignInPage() {
             },
             {
                 withCredentials: true,
-                validateStatus: (status) => [200, 404].includes(status),
+                validateStatus: (status) => [200, 401, 404].includes(status),
             }
         );
 
@@ -29,34 +54,38 @@ export function SignInPage() {
             navigate('/');
             refreshAuth();
         } else {
-            console.log('bad login');
+            setErrorMsg(data.message);
         }
     };
 
     return (
-        <div style={{ textAlign: 'center' }}>
-            <h1>Login</h1>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <input
-                        type="email"
-                        required
-                        placeholder="email"
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <input
-                        type="password"
-                        required
-                        placeholder="password"
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <input type="submit" value="Sign In" />
-                </div>
-            </form>
+        <div className={styles.sign_in}>
+            <h1>SIGN IN</h1>
+            <Field
+                variant="primary"
+                type="email"
+                placeholder="email"
+                className={styles.input}
+                onChange={(e) => setEmail(e.target.value)}
+            />
+            <Field
+                variant="primary"
+                type="password"
+                placeholder="password"
+                className={styles.input}
+                onChange={(e) => setPassword(e.target.value)}
+            />
+            {errorMsg && (
+                <span className={styles.error_message}>{errorMsg}</span>
+            )}
+            <Button
+                variant="primary"
+                kind="contained"
+                className={styles.submit}
+                onClick={handleSubmit}
+            >
+                SIGN IN
+            </Button>
         </div>
     );
 }

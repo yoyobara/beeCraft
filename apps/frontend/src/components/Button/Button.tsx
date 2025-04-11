@@ -1,30 +1,28 @@
 import clsx from 'clsx';
 import styles from './Button.module.scss';
-import { PropsWithChildren } from 'react';
+import React from 'react';
 
-interface ButtonProps extends PropsWithChildren {
+interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
     variant: 'primary' | 'secondary' | 'accent';
-    kind: 'contained' | 'outlined';
-    className?: string;
-    onClick?: React.MouseEventHandler<HTMLButtonElement>;
+    kind: 'contained' | 'outlined' | 'text';
 }
 
 export function Button({
     variant,
     kind,
     className,
-    onClick,
     children,
+    ...props
 }: ButtonProps) {
     return (
         <button
-            onClick={onClick}
             className={clsx(
                 styles.button,
                 styles[variant],
                 styles[kind],
                 className
             )}
+            {...props}
         >
             {children}
         </button>
