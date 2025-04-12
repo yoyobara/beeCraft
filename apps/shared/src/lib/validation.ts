@@ -1,4 +1,4 @@
-type ValidationResult = { ok: true } | { ok: false; reason: string };
+export type ValidationResult = { ok: true } | { ok: false; reason: string };
 
 export const validateEmail = (email: string): ValidationResult => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
@@ -19,4 +19,16 @@ export const validateFullName = (fullName: string): ValidationResult => {
     return fullName.length === 0
         ? { ok: false, reason: 'full name is empty.' }
         : { ok: true };
+};
+
+export const mergeValidations = (
+    ...validations: ValidationResult[]
+): ValidationResult => {
+    for (const validation of validations) {
+        if (!validation.ok) {
+            return validation;
+        }
+    }
+
+    return { ok: true };
 };
