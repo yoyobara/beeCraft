@@ -5,6 +5,12 @@ import styles from './SignUpPage.module.scss';
 import { useAuth } from '../../hooks/auth';
 import { Field } from '../../components/Field';
 import { Button } from '../../components/Button';
+import {
+    mergeValidations,
+    validateEmail,
+    validateFullName,
+    validatePassword,
+} from '@shared/validation';
 
 export function SignUpPage() {
     const [email, setEmail] = useState<string>('');
@@ -17,40 +23,20 @@ export function SignUpPage() {
     const navigate = useNavigate();
     const { refreshAuth } = useAuth();
 
-    const validate = (): { ok: true } | { ok: false; msg: string } => {
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-            return { ok: false, msg: 'please enter a valid email.' };
-        }
+    const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
+        const validation = mergeValidations(
+            validateEmail(email),
+            validateFullName(fullName),
+            validatePassword(password)
+        );
 
-        if (fullName.length === 0) {
-            return {
-                ok: false,
-                msg: 'full name is empty.',
-            };
-        }
-
-        if (password.length < 8) {
-            return {
-                ok: false,
-                msg: 'password length must be 8 characters or more.',
-            };
+        if (!validation.ok) {
+            setErrorMsg(validation.reason);
+            return;
         }
 
         if (password !== confirmPassword) {
-            return {
-                ok: false,
-                msg: 'passwords do not match.',
-            };
-        }
-
-        return { ok: true };
-    };
-
-    const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
-        const formValidation = validate();
-
-        if (!formValidation.ok) {
-            setErrorMsg(formValidation.msg);
+            setErrorMsg('passwords do not match.');
             return;
         }
 
