@@ -5,6 +5,11 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/auth';
 import { Field } from '../../components/Field';
 import { Button } from '../../components/Button';
+import {
+    mergeValidations,
+    validateEmail,
+    validatePassword,
+} from '@shared/validation';
 
 export function SignInPage() {
     const { refreshAuth } = useAuth();
@@ -14,27 +19,16 @@ export function SignInPage() {
     const [password, setPassword] = useState<string>('');
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
-    const validate = (): { ok: true } | { ok: false; msg: string } => {
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-            return { ok: false, msg: 'please enter a valid email.' };
-        }
-
-        if (password.length < 8) {
-            return {
-                ok: false,
-                msg: 'password length must be 8 characters or more.',
-            };
-        }
-
-        return { ok: true };
-    };
-
     const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
 
-        const formValidation = validate();
-        if (!formValidation.ok) {
-            setErrorMsg(formValidation.msg);
+        const validation = mergeValidations(
+            validateEmail(email),
+            validatePassword(password)
+        );
+
+        if (!validation.ok) {
+            setErrorMsg(validation.reason);
             return;
         }
 
