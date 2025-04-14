@@ -40,7 +40,7 @@ export function SignUpPage() {
             return;
         }
 
-        const { status } = await axios.post(
+        const response = await axios.post(
             'http://localhost:3333/user/register',
             {
                 email,
@@ -53,11 +53,11 @@ export function SignUpPage() {
             }
         );
 
-        if (status === 200) {
+        if (response.status === 200) {
             navigate('/');
             refreshAuth();
         } else {
-            setErrorMsg('passwords do not match!');
+            setErrorMsg(response.data.message);
         }
     };
 
