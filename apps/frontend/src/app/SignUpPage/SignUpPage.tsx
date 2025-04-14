@@ -5,6 +5,12 @@ import styles from './SignUpPage.module.scss';
 import { useAuth } from '../../hooks/auth';
 import { Field } from '../../components/Field';
 import { Button } from '../../components/Button';
+import {
+    mergeValidations,
+    validateEmail,
+    validateFullName,
+    validatePassword,
+} from '@shared/validation';
 
 export function SignUpPage() {
     const [email, setEmail] = useState<string>('');
@@ -17,44 +23,24 @@ export function SignUpPage() {
     const navigate = useNavigate();
     const { refreshAuth } = useAuth();
 
-    const validate = (): { ok: true } | { ok: false; msg: string } => {
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-            return { ok: false, msg: 'please enter a valid email.' };
-        }
-
-        if (fullName.length === 0) {
-            return {
-                ok: false,
-                msg: 'full name is empty.',
-            };
-        }
-
-        if (password.length < 8) {
-            return {
-                ok: false,
-                msg: 'password length must be 8 characters or more.',
-            };
-        }
-
-        if (password !== confirmPassword) {
-            return {
-                ok: false,
-                msg: 'passwords do not match.',
-            };
-        }
-
-        return { ok: true };
-    };
-
     const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
-        const formValidation = validate();
+        const validation = mergeValidations(
+            validateEmail(email),
+            validateFullName(fullName),
+            validatePassword(password)
+        );
 
-        if (!formValidation.ok) {
-            setErrorMsg(formValidation.msg);
+        if (!validation.ok) {
+            setErrorMsg(validation.reason);
             return;
         }
 
-        const { status } = await axios.post(
+        if (password !== confirmPassword) {
+            setErrorMsg('passwords do not match.');
+            return;
+        }
+
+        const response = await axios.post(
             'http://localhost:3333/user/register',
             {
                 email,
@@ -67,11 +53,11 @@ export function SignUpPage() {
             }
         );
 
-        if (status === 200) {
+        if (response.status === 200) {
             navigate('/');
             refreshAuth();
         } else {
-            setErrorMsg('passwords do not match!');
+            setErrorMsg(response.data.message);
         }
     };
 
