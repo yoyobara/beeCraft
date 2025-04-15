@@ -44,7 +44,12 @@ export function Navbar() {
                     <Button variant="accent" kind="text" onClick={handleLogout}>
                         LOG OUT
                     </Button>
-                    <img className={styles.icon} src={avatarIcon} alt="👤" />
+                    <span className={styles.name}>{fullName}</span>
+                    <img
+                        className={styles.avatar_icon}
+                        src={avatarIcon}
+                        alt="👤"
+                    />
                 </>
             ) : (
                 <>
