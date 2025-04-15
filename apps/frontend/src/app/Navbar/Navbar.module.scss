@@ -1,7 +1,6 @@
 @use "../../global.scss" as *;
 
 .navbar {
-    height: 8%;
     background-color: $bg-light;
     border-bottom: 5px solid $border;
     font-size: 1.5em;
@@ -14,8 +13,7 @@
 }
 
 .icon {
-    max-height: 100%;
-    width: auto;
+    width: 5em;
 }
 
 .about {
