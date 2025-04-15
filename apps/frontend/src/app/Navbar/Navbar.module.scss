@@ -1,7 +1,6 @@
 @use "../../global.scss" as *;
 
 .navbar {
-    height: 8%;
     background-color: $bg-light;
     border-bottom: 5px solid $border;
     font-size: 1.5em;
@@ -14,8 +13,11 @@
 }
 
 .icon {
-    max-height: 100%;
-    width: auto;
+    width: 5em;
+}
+
+.avatar_icon {
+    width: 3.5em;
 }
 
 .about {
@@ -23,6 +25,11 @@
 }
 
 .title {
-    font-weight: 300;
+    font-weight: 600;
     font-size: 3em;
+}
+
+.name {
+    font-size: 1.5em;
+    font-weight: 200;
 }

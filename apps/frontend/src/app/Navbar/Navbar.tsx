@@ -1,4 +1,5 @@
 import icon from '../../assets/beeNestIcon.png';
+import avatarIcon from '../../assets/avatar.webp';
 import styles from './Navbar.module.scss';
 import { useAuth } from '../../hooks/auth';
 import { Button } from '../../components/Button';
@@ -40,10 +41,15 @@ export function Navbar() {
             </Button>
             {fullName ? (
                 <>
-                    <span>hello {fullName}</span>
                     <Button variant="accent" kind="text" onClick={handleLogout}>
                         LOG OUT
                     </Button>
+                    <span className={styles.name}>{fullName}</span>
+                    <img
+                        className={styles.avatar_icon}
+                        src={avatarIcon}
+                        alt="👤"
+                    />
                 </>
             ) : (
                 <>
