@@ -30,7 +30,9 @@ export function Navbar() {
     return (
         <div className={styles.navbar}>
             <img className={styles.icon} src={icon} alt="beeCraft-icon" />
-            <span className={styles.title}>BeeCraft</span>
+            <span className={styles.title} onClick={() => navgiate('/')}>
+                BeeCraft
+            </span>
             {fullName && (
                 <Button
                     variant="accent"
