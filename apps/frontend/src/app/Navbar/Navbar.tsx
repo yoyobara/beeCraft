@@ -32,7 +32,13 @@ export function Navbar() {
             <img className={styles.icon} src={icon} alt="beeCraft-icon" />
             <span className={styles.title}>BeeCraft</span>
             {fullName && (
-                <Button variant="accent" kind="text">
+                <Button
+                    variant="accent"
+                    kind="text"
+                    onClick={() => {
+                        navgiate('/worlds');
+                    }}
+                >
                     WORLDS
                 </Button>
             )}
