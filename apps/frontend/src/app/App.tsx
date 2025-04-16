@@ -1,4 +1,5 @@
 import '../global.scss';
+import styles from './App.module.scss';
 import { Navbar } from './Navbar';
 import { LandingPage } from './LandingPage';
 import { Route, Routes } from 'react-router-dom';
@@ -7,13 +8,13 @@ import { SignUpPage } from './SignUpPage';
 
 export default function App() {
     return (
-        <>
+        <div className={styles.app}>
             <Navbar />
             <Routes>
                 <Route path="/" element={<LandingPage />} />
                 <Route path="/sign_in" element={<SignInPage />} />
                 <Route path="/sign_up" element={<SignUpPage />} />
             </Routes>
-        </>
+        </div>
     );
 }
