@@ -19,8 +19,8 @@ export function Navbar() {
             }
         );
 
+        await refreshAuth();
         navgiate('/');
-        refreshAuth();
     };
 
     if (isLoading) {

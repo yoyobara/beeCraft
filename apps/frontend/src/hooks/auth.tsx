@@ -10,7 +10,7 @@ import {
 interface Auth {
     fullName: string | null;
     isLoading: boolean;
-    refreshAuth: () => void;
+    refreshAuth: () => Promise<void>;
 }
 
 const AuthContext = createContext<Auth | undefined>(undefined);
