@@ -1,10 +1,10 @@
-import icon from '../../assets/beeNestIcon.png';
-import avatarIcon from '../../assets/avatar.webp';
-import styles from './Navbar.module.scss';
-import { useAuth } from '../../hooks/auth';
-import { Button } from '../../components/Button';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import icon from '../../assets/beeNestIcon.png';
+import avatarIcon from '../../assets/avatar.webp';
+import { useAuth } from '../../hooks/auth';
+import { Button } from '../../components/Button';
+import styles from './Navbar.module.scss';
 
 export function Navbar() {
     const { fullName, isLoading, refreshAuth } = useAuth();

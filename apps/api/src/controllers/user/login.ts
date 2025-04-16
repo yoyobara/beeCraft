@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { User } from '../../models';
 import { compare } from 'bcryptjs';
+import { User } from '../../models';
 
 export async function login(req: Request, res: Response) {
     const { email, password } = req.body;

@@ -1,15 +1,15 @@
 import axios from 'axios';
-import styles from './SignInPage.module.scss';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../hooks/auth';
-import { Field } from '../../components/Field';
-import { Button } from '../../components/Button';
 import {
     mergeValidations,
     validateEmail,
     validatePassword,
 } from '@shared/validation';
+import { useAuth } from '../../hooks/auth';
+import { Field } from '../../components/Field';
+import { Button } from '../../components/Button';
+import styles from './SignInPage.module.scss';
 
 export function SignInPage() {
     const { refreshAuth } = useAuth();

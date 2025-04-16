@@ -1,8 +1,8 @@
 import '../global.scss';
+import { Route, Routes } from 'react-router-dom';
 import styles from './App.module.scss';
 import { Navbar } from './Navbar';
 import { LandingPage } from './LandingPage';
-import { Route, Routes } from 'react-router-dom';
 import { SignInPage } from './SignInPage';
 import { SignUpPage } from './SignUpPage';
 

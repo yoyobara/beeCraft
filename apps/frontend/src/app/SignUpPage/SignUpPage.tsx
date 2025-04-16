@@ -1,16 +1,16 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styles from './SignUpPage.module.scss';
-import { useAuth } from '../../hooks/auth';
-import { Field } from '../../components/Field';
-import { Button } from '../../components/Button';
 import {
     mergeValidations,
     validateEmail,
     validateFullName,
     validatePassword,
 } from '@shared/validation';
+import { useAuth } from '../../hooks/auth';
+import { Field } from '../../components/Field';
+import { Button } from '../../components/Button';
+import styles from './SignUpPage.module.scss';
 
 export function SignUpPage() {
     const [email, setEmail] = useState<string>('');
