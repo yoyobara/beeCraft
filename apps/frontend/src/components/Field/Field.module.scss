@@ -1,4 +1,4 @@
-@use "../../global.scss" as *;
+@use "../../colors.scss" as *;
 
 @mixin input_color($color) {
 	border-color: $color;
