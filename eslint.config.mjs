@@ -1,6 +1,7 @@
 import nx from '@nx/eslint-plugin';
+import importPlugin from "eslint-plugin-import";
 
-export default [
+export const baseConfig =  [
     ...nx.configs['flat/base'],
     ...nx.configs['flat/typescript'],
     ...nx.configs['flat/javascript'],
@@ -36,7 +37,31 @@ export default [
             '**/*.cjs',
             '**/*.mjs',
         ],
-        // Override or add rules here
         rules: {},
     },
 ];
+
+export const baseImportConfig = [
+    importPlugin.flatConfigs.recommended,
+    importPlugin.flatConfigs.typescript,
+    {
+        files: [
+            '**/*.ts',
+            '**/*.tsx',
+            '**/*.cts',
+            '**/*.mts',
+            '**/*.js',
+            '**/*.jsx',
+            '**/*.cjs',
+            '**/*.mjs',
+        ],
+        rules: {
+            "import/order": "warn"
+        },
+        settings: {
+            'import/resolver': {
+                typescript: {},
+            },
+        },
+    },
+]
