@@ -1,5 +1,6 @@
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import clsx from 'clsx';
 import icon from '../../assets/beeNestIcon.png';
 import avatarIcon from '../../assets/avatar.webp';
 import { useAuth } from '../../hooks/auth';
@@ -8,7 +9,9 @@ import styles from './Navbar.module.scss';
 
 export function Navbar() {
     const { fullName, isLoading, refreshAuth } = useAuth();
+
     const navgiate = useNavigate();
+    const { pathname } = useLocation();
 
     const handleLogout = async () => {
         await axios.post(
@@ -40,11 +43,21 @@ export function Navbar() {
                     onClick={() => {
                         navgiate('/worlds');
                     }}
+                    className={clsx(
+                        pathname === '/worlds' && styles.current_page_button
+                    )}
                 >
                     WORLDS
                 </Button>
             )}
-            <Button className={styles.about} variant="accent" kind="text">
+            <Button
+                variant="accent"
+                kind="text"
+                className={clsx(
+                    styles.about,
+                    pathname === '/about' && styles.current_page_button
+                )}
+            >
                 ABOUT US
             </Button>
             {fullName ? (
@@ -67,6 +80,10 @@ export function Navbar() {
                         onClick={() => {
                             navgiate('/sign_in');
                         }}
+                        className={clsx(
+                            pathname === '/sign_in' &&
+                                styles.current_page_button
+                        )}
                     >
                         SIGN IN
                     </Button>
@@ -76,6 +93,10 @@ export function Navbar() {
                         onClick={() => {
                             navgiate('/sign_up');
                         }}
+                        className={clsx(
+                            pathname === '/sign_up' &&
+                                styles.current_page_button
+                        )}
                     >
                         SIGN UP
                     </Button>
