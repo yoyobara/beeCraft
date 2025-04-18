@@ -1,12 +1,10 @@
 import {
-    BelongsToGetAssociationMixin,
     CreationOptional,
     DataTypes,
     ForeignKey,
     InferAttributes,
     InferCreationAttributes,
     Model,
-    NonAttribute,
 } from '@sequelize/core';
 import {
     Attribute,
@@ -45,7 +43,4 @@ export class PointOfInterest extends Model<
 
     @Attribute(DataTypes.INTEGER)
     declare worldId: ForeignKey<World['id']>;
-
-    declare world: NonAttribute<World>;
-    declare getWorld: BelongsToGetAssociationMixin<World>;
 }

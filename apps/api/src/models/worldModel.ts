@@ -7,7 +7,6 @@ import {
     ForeignKey,
     NonAttribute,
     HasManyGetAssociationsMixin,
-    BelongsToGetAssociationMixin,
 } from '@sequelize/core';
 import {
     PrimaryKey,
@@ -36,9 +35,6 @@ export class World extends Model<
 
     @Attribute(DataTypes.INTEGER)
     declare userId: ForeignKey<User['id']>;
-
-    declare user: NonAttribute<User>;
-    declare getUser: BelongsToGetAssociationMixin<User>;
 
     @HasMany(() => PointOfInterest, {
         foreignKey: 'worldId',
