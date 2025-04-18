@@ -1,8 +1,8 @@
 import express, { Express } from 'express';
 import cors from 'cors';
-import session from 'express-session';
 
 import userRouter from './routes/user';
+import { sessionHandler } from './middlewares/session';
 
 const app: Express = express();
 const ORIGIN = 'http://localhost:4200';
@@ -16,18 +16,7 @@ app.use(
     })
 );
 
-app.use(
-    session({
-        secret: 'my-secret',
-        resave: false,
-        saveUninitialized: false,
-        cookie: {
-            secure: false,
-            httpOnly: true,
-            maxAge: 24 * 60 * 60 * 1000,
-        },
-    })
-);
+app.use(sessionHandler);
 
 app.use('/user', userRouter);
 
