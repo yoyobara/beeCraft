@@ -1,1 +1,14 @@
-@use "../../../colors.scss" as *;
+@use "../../../../colors.scss" as *;
+
+.world_entry {
+	margin: 3%;
+	padding: 2%;
+
+	background-color: $secondary;
+	border-radius: 5px;
+	text-align: center;
+
+	&.selected {
+		border: ridge 5px $primary;
+	}
+}
