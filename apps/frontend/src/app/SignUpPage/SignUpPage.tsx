@@ -54,8 +54,8 @@ export function SignUpPage() {
         );
 
         if (response.status === 200) {
+            await refreshAuth();
             navigate('/');
-            refreshAuth();
         } else {
             setErrorMsg(response.data.message);
         }

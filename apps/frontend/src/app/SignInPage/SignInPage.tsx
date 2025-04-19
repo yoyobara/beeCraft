@@ -45,8 +45,8 @@ export function SignInPage() {
         );
 
         if (status === 200) {
+            await refreshAuth();
             navigate('/');
-            refreshAuth();
         } else {
             setErrorMsg(data.message);
         }
