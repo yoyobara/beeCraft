@@ -1,3 +1,5 @@
+import styles from './Sidebar.module.scss';
+
 export function Sidebar() {
-    return <p>this is sidebar</p>;
+    return <div className={styles.sidebar}>this is sidebar</div>;
 }
