@@ -4,4 +4,11 @@
 	background-image: url('../assets/background.png');
 	background-color: rgba(150,150,150, 1);
 	background-blend-mode: lighten;
+
+	display: flex;
+	flex-direction: column;
+}
+
+.rest_of_page {
+	flex: 1;
 }
