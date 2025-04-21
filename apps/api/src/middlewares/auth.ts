@@ -10,8 +10,8 @@ export async function authenticate(
         res.status(401).send({ message: 'Unknown user' });
         return;
     }
-    const user = await User.findByPk(req.session.loggedInUserId);
 
+    const user = await User.findByPk(req.session.loggedInUserId);
     if (user === null) {
         res.status(401).send({ message: 'Unknown user' });
         return;

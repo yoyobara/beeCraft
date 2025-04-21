@@ -1,6 +1,7 @@
 import {
     CreationOptional,
     DataTypes,
+    HasManyCreateAssociationMixin,
     HasManyGetAssociationsMixin,
     InferAttributes,
     InferCreationAttributes,
@@ -47,4 +48,5 @@ export class User extends Model<
     })
     declare worlds: NonAttribute<World>;
     declare getWorlds: HasManyGetAssociationsMixin<World>;
+    declare createWorld: HasManyCreateAssociationMixin<World, 'userId'>;
 }
