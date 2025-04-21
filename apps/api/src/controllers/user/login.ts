@@ -17,5 +17,5 @@ export async function login(req: Request, res: Response) {
     }
 
     req.session.loggedInUserId = user.id;
-    return res.send({ message: 'login successful' });
+    return res.sendStatus(200);
 }

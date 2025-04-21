@@ -7,5 +7,5 @@ export function logout(req: Request, res: Response) {
         }
     });
 
-    res.send({ message: 'logged out' });
+    res.sendStatus(200);
 }

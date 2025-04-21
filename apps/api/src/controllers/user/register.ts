@@ -20,5 +20,5 @@ export async function register(req: Request, res: Response) {
     });
 
     req.session.loggedInUserId = newUser.id;
-    return res.send({ message: 'register successful' });
+    return res.sendStatus(200);
 }
