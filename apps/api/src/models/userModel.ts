@@ -15,6 +15,7 @@ import {
     Unique,
     NotNull,
     HasMany,
+    DeletedAt,
 } from '@sequelize/core/decorators-legacy';
 import { World } from './worldModel';
 
@@ -39,6 +40,9 @@ export class User extends Model<
     @Attribute(DataTypes.STRING)
     @NotNull
     declare passwordHash: string;
+
+    @DeletedAt
+    declare deletedAt: Date | null;
 
     @HasMany(() => World, {
         foreignKey: 'userId',
