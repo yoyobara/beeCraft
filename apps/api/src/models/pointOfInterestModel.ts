@@ -11,6 +11,7 @@ import {
     PrimaryKey,
     AutoIncrement,
     NotNull,
+    DeletedAt,
 } from '@sequelize/core/decorators-legacy';
 import { World } from './worldModel';
 
@@ -40,6 +41,9 @@ export class PointOfInterest extends Model<
     @Attribute(DataTypes.BOOLEAN)
     @NotNull
     declare isEnd: boolean;
+
+    @DeletedAt
+    declare deletedAt: Date | null;
 
     @Attribute(DataTypes.INTEGER)
     declare worldId: ForeignKey<World['id']>;
