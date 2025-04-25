@@ -29,7 +29,6 @@ export class World extends Model<
     declare id: CreationOptional<number>;
 
     @Attribute(DataTypes.STRING)
-    @Unique
     @NotNull
     declare name: string;
 

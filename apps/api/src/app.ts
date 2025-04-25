@@ -1,4 +1,5 @@
 import express, { Express } from 'express';
+import 'express-async-errors';
 import cors from 'cors';
 
 import { sessionHandler } from './middlewares/session';
