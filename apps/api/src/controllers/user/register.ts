@@ -2,15 +2,14 @@ import { Request, Response } from 'express';
 import { hash } from 'bcryptjs';
 import { User } from '../../models';
 import { SALT_ROUNDS } from '../../utils/crypto';
+import { msg } from '../../utils/response';
 
 export async function register(req: Request, res: Response) {
     const { email, fullName, password } = req.body;
 
     const userExists = await User.findOne({ where: { email } });
     if (userExists) {
-        return res
-            .status(409)
-            .send({ message: 'user with that email already exists' });
+        return res.status(409).send(msg('user with that email already exists'));
     }
 
     const newUser = await User.create({
