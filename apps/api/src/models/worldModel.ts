@@ -12,9 +12,9 @@ import {
     PrimaryKey,
     AutoIncrement,
     NotNull,
-    Unique,
     Attribute,
     HasMany,
+    DeletedAt,
 } from '@sequelize/core/decorators-legacy';
 import { User } from './userModel';
 import { PointOfInterest } from './pointOfInterestModel';
@@ -29,9 +29,11 @@ export class World extends Model<
     declare id: CreationOptional<number>;
 
     @Attribute(DataTypes.STRING)
-    @Unique
     @NotNull
     declare name: string;
+
+    @DeletedAt
+    declare deletedAt: Date | null;
 
     @Attribute(DataTypes.INTEGER)
     declare userId: ForeignKey<User['id']>;

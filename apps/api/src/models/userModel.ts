@@ -1,6 +1,7 @@
 import {
     CreationOptional,
     DataTypes,
+    HasManyCreateAssociationMixin,
     HasManyGetAssociationsMixin,
     InferAttributes,
     InferCreationAttributes,
@@ -14,6 +15,7 @@ import {
     Unique,
     NotNull,
     HasMany,
+    DeletedAt,
 } from '@sequelize/core/decorators-legacy';
 import { World } from './worldModel';
 
@@ -39,6 +41,9 @@ export class User extends Model<
     @NotNull
     declare passwordHash: string;
 
+    @DeletedAt
+    declare deletedAt: Date | null;
+
     @HasMany(() => World, {
         foreignKey: 'userId',
         inverse: {
@@ -47,4 +52,5 @@ export class User extends Model<
     })
     declare worlds: NonAttribute<World>;
     declare getWorlds: HasManyGetAssociationsMixin<World>;
+    declare createWorld: HasManyCreateAssociationMixin<World, 'userId'>;
 }

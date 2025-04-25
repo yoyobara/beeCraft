@@ -1,11 +1,12 @@
 import { Request, Response } from 'express';
+import { msg } from '../../utils/response';
 
 export function logout(req: Request, res: Response) {
     req.session.destroy((err) => {
         if (err) {
-            res.status(500).send({ message: 'could not stop session' });
+            res.status(500).send(msg('could not stop session'));
         }
     });
 
-    res.send({ message: 'logged out' });
+    res.sendStatus(200);
 }
