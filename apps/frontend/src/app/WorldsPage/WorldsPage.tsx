@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import useLocalStorage from 'use-local-storage';
 import styles from './WorldsPage.module.scss';
 import { WorldEntry } from './WorldEntry';
 
@@ -10,24 +11,33 @@ interface World {
 
 export function WorldsPage() {
     const [worlds, setWorlds] = useState<World[]>([]);
-    const [selectedWorldId, setSelectedWorldId] = useState<number | null>(null);
-
-    const updateWorlds = async () => {
-        const fetchedWorlds = (
-            await axios.get<World[]>('http://localhost:3333/world/all', {
-                withCredentials: true,
-            })
-        ).data;
-
-        setWorlds(fetchedWorlds);
-        if (fetchedWorlds.length > 0) {
-            setSelectedWorldId(fetchedWorlds[0].id);
-        }
-    };
+    const [selectedWorldId, setSelectedWorldId] = useLocalStorage<
+        number | null
+    >('selected_world', null);
 
     useEffect(() => {
+        const updateWorlds = async () => {
+            const fetchedWorlds = (
+                await axios.get<World[]>('http://localhost:3333/world/all', {
+                    withCredentials: true,
+                })
+            ).data;
+
+            setWorlds(fetchedWorlds);
+            if (fetchedWorlds.length > 0) {
+                if (
+                    selectedWorldId === null ||
+                    fetchedWorlds.every((world) => world.id !== selectedWorldId)
+                ) {
+                    setSelectedWorldId(fetchedWorlds[0].id);
+                }
+            } else {
+                setSelectedWorldId(null);
+            }
+        };
+
         updateWorlds();
-    }, []);
+    }, [selectedWorldId, setSelectedWorldId]);
 
     return (
         <div className={styles.worlds_page}>
