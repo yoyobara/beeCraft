@@ -10,15 +10,19 @@ interface World {
 
 export function Sidebar() {
     const [worlds, setWorlds] = useState<World[]>([]);
+    const [selectedWorldId, setSelectedWorldId] = useState<number | null>(null);
 
     const updateWorlds = async () => {
-        setWorlds(
-            (
-                await axios.get<World[]>('http://localhost:3333/world/all', {
-                    withCredentials: true,
-                })
-            ).data
-        );
+        const fetchedWorlds = (
+            await axios.get<World[]>('http://localhost:3333/world/all', {
+                withCredentials: true,
+            })
+        ).data;
+
+        setWorlds(fetchedWorlds);
+        if (fetchedWorlds.length > 0) {
+            setSelectedWorldId(fetchedWorlds[0].id);
+        }
     };
 
     useEffect(() => {
@@ -28,7 +32,11 @@ export function Sidebar() {
     return (
         <div className={styles.sidebar}>
             {worlds.map((world) => (
-                <WorldEntry key={world.id} name={world.name} />
+                <WorldEntry
+                    key={world.id}
+                    name={world.name}
+                    isSelected={selectedWorldId === world.id}
+                />
             ))}
         </div>
     );
