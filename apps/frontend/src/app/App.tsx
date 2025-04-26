@@ -9,10 +9,21 @@ import { SignInPage } from './SignInPage';
 import { SignUpPage } from './SignUpPage';
 import { WorldsPage } from './WorldsPage';
 
-export function OnlyGuest({ children }: PropsWithChildren) {
+export function Private({
+    children,
+    accessType,
+}: { accessType: 'user' | 'guest' } & PropsWithChildren) {
     const { fullName } = useAuth();
 
-    return fullName === null ? children : <Navigate to="/worlds" />;
+    if (accessType === 'user' && fullName === null) {
+        return <Navigate to="/" />;
+    }
+
+    if (accessType === 'guest' && fullName !== null) {
+        return <Navigate to="/worlds" />;
+    }
+
+    return children;
 }
 
 export function App() {
@@ -24,28 +35,35 @@ export function App() {
                     <Route
                         path="/"
                         element={
-                            <OnlyGuest>
+                            <Private accessType="guest">
                                 <LandingPage />
-                            </OnlyGuest>
+                            </Private>
                         }
                     />
                     <Route
                         path="/sign_in"
                         element={
-                            <OnlyGuest>
+                            <Private accessType="guest">
                                 <SignInPage />
-                            </OnlyGuest>
+                            </Private>
                         }
                     />
                     <Route
                         path="/sign_up"
                         element={
-                            <OnlyGuest>
+                            <Private accessType="guest">
                                 <SignUpPage />
-                            </OnlyGuest>
+                            </Private>
                         }
                     />
-                    <Route path="/worlds" element={<WorldsPage />} />
+                    <Route
+                        path="/worlds"
+                        element={
+                            <Private accessType="user">
+                                <WorldsPage />
+                            </Private>
+                        }
+                    />
                 </Routes>
             </div>
         </div>
