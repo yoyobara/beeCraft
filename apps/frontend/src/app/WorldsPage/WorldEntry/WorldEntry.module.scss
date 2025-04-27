@@ -6,13 +6,27 @@
 
 	background-color: $secondary;
 	border-radius: 5px;
-	text-align: center;
+
+	display: flex;
+	align-items: center;
 
 	&.selected {
 		border: ridge 5px $primary;
 	}
+}
 
-	&:not(.selected) {
-		cursor: pointer;
+.world_name {
+	flex-grow: 1;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.three_dots {
+	width: 1em;
+	height: 1em;
+	opacity: 0;
+
+	&:hover {
+		opacity: 1;
 	}
 }
