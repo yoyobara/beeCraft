@@ -1,0 +1,12 @@
+@use "../../../../colors.scss" as *;
+
+.menu {
+	position: absolute;
+	background-color: white;
+	border: solid 5px $primary;
+	border-radius: 10px;
+	padding: 0.2em;
+	
+	display: flex;
+	flex-direction: column;
+}
