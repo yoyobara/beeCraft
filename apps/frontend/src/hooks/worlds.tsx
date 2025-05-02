@@ -1,0 +1,74 @@
+import axios from 'axios';
+import {
+    createContext,
+    PropsWithChildren,
+    useCallback,
+    useContext,
+    useEffect,
+    useState,
+} from 'react';
+import useLocalStorage from 'use-local-storage';
+
+interface World {
+    id: number;
+    name: string;
+}
+
+interface WorldsContext {
+    worlds: World[];
+    selectedWorldId: number | null;
+    setSelectedWorldId: (id: number | null) => void;
+
+    fetchWorlds(): Promise<void>;
+}
+
+const worldsContext = createContext<WorldsContext | null>(null);
+
+export function WorldsProvider({ children }: PropsWithChildren) {
+    const [worlds, setWorlds] = useState<World[]>([]);
+    const [selectedWorldId, setSelectedWorldId] = useLocalStorage<
+        number | null
+    >('selected_world', null);
+
+    const fetchWorlds = useCallback(async () => {
+        const fetchedWorlds = (
+            await axios.get<World[]>('http://localhost:3333/world/all', {
+                withCredentials: true,
+            })
+        ).data;
+        setWorlds(fetchedWorlds);
+
+        if (fetchedWorlds.length > 0) {
+            if (
+                selectedWorldId === null ||
+                fetchedWorlds.every((world) => world.id !== selectedWorldId)
+            ) {
+                setSelectedWorldId(fetchedWorlds[0].id);
+            }
+        } else {
+            setSelectedWorldId(null);
+        }
+    }, [selectedWorldId, setSelectedWorldId]);
+
+    useEffect(() => {
+        fetchWorlds();
+    }, [fetchWorlds]);
+
+    return (
+        <worldsContext.Provider
+            value={{ worlds, fetchWorlds, selectedWorldId, setSelectedWorldId }}
+        >
+            {children}
+        </worldsContext.Provider>
+    );
+}
+
+export function useWorlds() {
+    const context = useContext(worldsContext);
+
+    if (context !== null) {
+        return { ...context };
+    } else {
+        throw Error('didnt use the context provider...');
+    }
+}

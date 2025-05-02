@@ -2,6 +2,7 @@ import '../global.scss';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { PropsWithChildren } from 'react';
 import { useAuth } from '../hooks/auth';
+import { WorldsProvider } from '../hooks/worlds';
 import styles from './App.module.scss';
 import { Navbar } from './Navbar';
 import { LandingPage } from './LandingPage';
@@ -60,7 +61,9 @@ export function App() {
                         path="/worlds"
                         element={
                             <Private accessType="user">
-                                <WorldsPage />
+                                <WorldsProvider>
+                                    <WorldsPage />
+                                </WorldsProvider>
                             </Private>
                         }
                     />

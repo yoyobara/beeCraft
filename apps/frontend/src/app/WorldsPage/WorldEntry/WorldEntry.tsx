@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import { useRef, useState } from 'react';
+import { useWorlds } from '../../../hooks/worlds';
 import threedots from '../../../assets/dots.svg';
 import styles from './WorldEntry.module.scss';
 import { WorldEntryMenu } from './WorldEntryMenu';
@@ -7,16 +8,11 @@ import { WorldEntryMenu } from './WorldEntryMenu';
 interface WorldEntryProps {
     name: string;
     id: number;
-    isSelected: boolean;
-    setSelectedWorldId: (id: number) => void;
 }
 
-export function WorldEntry({
-    name,
-    id,
-    isSelected,
-    setSelectedWorldId,
-}: WorldEntryProps) {
+export function WorldEntry({ name, id }: WorldEntryProps) {
+    const { selectedWorldId, setSelectedWorldId } = useWorlds();
+
     const [optionsMenuVisible, setOptionsMenuVisible] =
         useState<boolean>(false);
     const [menuPosition, setMenuPosition] = useState({ x: 0, y: 0 });
@@ -32,10 +28,17 @@ export function WorldEntry({
             <div
                 className={clsx(
                     styles.world_entry,
-                    isSelected && styles.selected
+                    id === selectedWorldId && styles.selected
                 )}
             >
-                <div className={styles.world_name}>{name}</div>
+                <div
+                    onClick={() => {
+                        setSelectedWorldId(id);
+                    }}
+                    className={styles.world_name}
+                >
+                    {name}
+                </div>
                 <img
                     src={threedots}
                     ref={threeDotsRef}
