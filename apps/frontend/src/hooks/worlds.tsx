@@ -20,6 +20,7 @@ interface WorldsContext {
     setSelectedWorldId: (id: number | null) => void;
 
     deleteWorld(id: number): Promise<void>;
+    renameWorld(id: number, newName: string): Promise<boolean>;
 }
 
 const worldsContext = createContext<WorldsContext | null>(null);
@@ -51,13 +52,26 @@ export function WorldsProvider({ children }: PropsWithChildren) {
     }, [selectedWorldId, setSelectedWorldId]);
 
     const deleteWorld = async (id: number) => {
-        console.log('id', id);
         await axios.post(
             'http://localhost:3333/world/delete',
             { worldId: id },
             { withCredentials: true }
         );
         await fetchWorlds();
+    };
+
+    const renameWorld = async (id: number, newName: string) => {
+        const { status } = await axios.post(
+            'http://localhost:3333/world/rename',
+            { worldId: id, newName },
+            {
+                withCredentials: true,
+                validateStatus: (status) => [200, 409].includes(status),
+            }
+        );
+        await fetchWorlds();
+
+        return status === 200;
     };
 
     useEffect(() => {
@@ -71,6 +85,7 @@ export function WorldsProvider({ children }: PropsWithChildren) {
                 selectedWorldId,
                 setSelectedWorldId,
                 deleteWorld,
+                renameWorld,
             }}
         >
             {children}

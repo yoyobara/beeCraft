@@ -9,6 +9,7 @@
 
 	display: flex;
 	align-items: center;
+	column-gap: 20px;
 
 	border: ridge 5px transparent;
 
@@ -19,8 +20,15 @@
 
 .world_name {
 	flex-grow: 1;
+	width: 200px;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	outline: none;
+	border: none;
+	background-color: transparent;
+	font-size: 1em;
 }
 
 .three_dots {
@@ -32,15 +40,4 @@
 	&:hover {
 		opacity: 1;
 	}
-}
-
-.options_modal {
-	position: absolute;
-	background-color: white;
-	border: solid 5px $primary;
-	border-radius: 10px;
-	padding: 0.2em;
-	
-	display: flex;
-	flex-direction: column;
 }

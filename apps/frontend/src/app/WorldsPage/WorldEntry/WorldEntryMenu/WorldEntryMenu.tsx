@@ -8,6 +8,7 @@ interface WorldEntryMenuProps {
     setOptionsMenuVisible: React.Dispatch<React.SetStateAction<boolean>>;
     position: { x: number; y: number };
     worldId: number;
+    handleRename(): void;
 }
 
 export function WorldEntryMenu({
@@ -15,6 +16,7 @@ export function WorldEntryMenu({
     threeDotsRef,
     position,
     worldId,
+    handleRename,
 }: WorldEntryMenuProps) {
     const { deleteWorld } = useWorlds();
 
@@ -39,7 +41,7 @@ export function WorldEntryMenu({
             className={styles.menu}
             style={{ left: position.x, top: position.y }}
         >
-            <Button kind="text" variant="primary">
+            <Button onClick={handleRename} kind="text" variant="primary">
                 rename
             </Button>
             <Button
