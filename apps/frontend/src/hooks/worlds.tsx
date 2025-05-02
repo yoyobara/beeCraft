@@ -19,7 +19,7 @@ interface WorldsContext {
     selectedWorldId: number | null;
     setSelectedWorldId: (id: number | null) => void;
 
-    fetchWorlds(): Promise<void>;
+    deleteWorld(id: number): Promise<void>;
 }
 
 const worldsContext = createContext<WorldsContext | null>(null);
@@ -50,13 +50,28 @@ export function WorldsProvider({ children }: PropsWithChildren) {
         }
     }, [selectedWorldId, setSelectedWorldId]);
 
+    const deleteWorld = async (id: number) => {
+        console.log('id', id);
+        await axios.post(
+            'http://localhost:3333/world/delete',
+            { worldId: id },
+            { withCredentials: true }
+        );
+        await fetchWorlds();
+    };
+
     useEffect(() => {
         fetchWorlds();
     }, [fetchWorlds]);
 
     return (
         <worldsContext.Provider
-            value={{ worlds, fetchWorlds, selectedWorldId, setSelectedWorldId }}
+            value={{
+                worlds,
+                selectedWorldId,
+                setSelectedWorldId,
+                deleteWorld,
+            }}
         >
             {children}
         </worldsContext.Provider>

@@ -49,6 +49,7 @@ export function WorldEntry({ name, id }: WorldEntryProps) {
             </div>
             {optionsMenuVisible && (
                 <WorldEntryMenu
+                    worldId={id}
                     position={menuPosition}
                     setOptionsMenuVisible={setOptionsMenuVisible}
                     threeDotsRef={threeDotsRef}
