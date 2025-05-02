@@ -6,11 +6,17 @@ import { WorldEntryMenu } from './WorldEntryMenu';
 
 interface WorldEntryProps {
     name: string;
+    id: number;
     isSelected: boolean;
-    onClick: React.MouseEventHandler<HTMLDivElement>;
+    setSelectedWorldId: (id: number) => void;
 }
 
-export function WorldEntry({ name, isSelected, onClick }: WorldEntryProps) {
+export function WorldEntry({
+    name,
+    id,
+    isSelected,
+    setSelectedWorldId,
+}: WorldEntryProps) {
     const [optionsMenuVisible, setOptionsMenuVisible] =
         useState<boolean>(false);
     const [menuPosition, setMenuPosition] = useState({ x: 0, y: 0 });
@@ -28,7 +34,6 @@ export function WorldEntry({ name, isSelected, onClick }: WorldEntryProps) {
                     styles.world_entry,
                     isSelected && styles.selected
                 )}
-                onClick={onClick}
             >
                 <div className={styles.world_name}>{name}</div>
                 <img
