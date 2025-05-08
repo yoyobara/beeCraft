@@ -13,14 +13,16 @@ export function Private({
     children,
     accessType,
 }: { accessType: 'user' | 'guest' } & PropsWithChildren) {
-    const { fullName } = useAuth();
+    const { fullName, isLoading } = useAuth();
 
-    if (accessType === 'user' && fullName === null) {
-        return <Navigate to="/" />;
-    }
+    if (!isLoading) {
+        if (accessType === 'user' && fullName === null) {
+            return <Navigate to="/" />;
+        }
 
-    if (accessType === 'guest' && fullName !== null) {
-        return <Navigate to="/worlds" />;
+        if (accessType === 'guest' && fullName !== null) {
+            return <Navigate to="/worlds" />;
+        }
     }
 
     return children;
