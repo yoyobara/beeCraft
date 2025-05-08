@@ -1,7 +1,7 @@
-import clsx from 'clsx';
 import styles from './PointEntry.module.scss';
 
 export interface PointOfInterest {
+    id: number;
     name: string;
     x: number;
     y: number | null;
@@ -16,7 +16,7 @@ interface PointEntryProps {
 
 export function PointEntry({ data }: PointEntryProps) {
     return (
-        <tr>
+        <tr className={styles.row}>
             <td>{data.name}</td>
             <td>{data.x}</td>
             <td>{data.y}</td>

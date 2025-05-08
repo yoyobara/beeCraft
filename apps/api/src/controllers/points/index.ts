@@ -3,9 +3,7 @@ import { World } from '../../models';
 import { msg } from '../../utils/response';
 
 export async function getPoints(req: Request, res: Response) {
-    const { worldId } = req.body;
-
-    const world = await World.findByPk(worldId);
+    const world = await World.findByPk(req.query.worldId);
     if (!world) {
         return res.status(404).send(msg('no such world...'));
     }
