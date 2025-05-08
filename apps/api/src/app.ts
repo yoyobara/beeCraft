@@ -5,6 +5,7 @@ import cors from 'cors';
 import { sessionHandler } from './middlewares/session';
 import { userRouter, worldRouter } from './routes';
 import { pointsRouter } from './routes/points';
+import { World } from './models';
 
 const app: Express = express();
 const ORIGIN = 'http://localhost:4200';
