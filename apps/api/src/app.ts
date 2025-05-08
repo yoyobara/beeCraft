@@ -4,6 +4,7 @@ import cors from 'cors';
 
 import { sessionHandler } from './middlewares/session';
 import { userRouter, worldRouter } from './routes';
+import { pointsRouter } from './routes/points';
 
 const app: Express = express();
 const ORIGIN = 'http://localhost:4200';
@@ -21,5 +22,6 @@ app.use(sessionHandler);
 
 app.use('/user', userRouter);
 app.use('/world', worldRouter);
+app.use('/points', pointsRouter);
 
 export default app;
