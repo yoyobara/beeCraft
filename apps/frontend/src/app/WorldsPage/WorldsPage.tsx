@@ -13,7 +13,7 @@ export function WorldsPage() {
     const [worlds, setWorlds] = useState<World[]>([]);
     const [selectedWorldId, setSelectedWorldId] = useLocalStorage<
         null | number
-    >('selected_world', null);
+    >('selected_world_id', null);
 
     const fetchWorlds = useCallback(async () => {
         const fetchedWorlds = (
@@ -24,17 +24,21 @@ export function WorldsPage() {
 
         setWorlds(fetchedWorlds);
 
-        if (fetchedWorlds.length > 0) {
-            if (
-                selectedWorldId === null ||
-                fetchedWorlds.every((world) => world.id !== selectedWorldId)
-            ) {
-                setSelectedWorldId(fetchedWorlds[0].id);
+        setSelectedWorldId((prevWorldId) => {
+            if (fetchedWorlds.length > 0) {
+                if (
+                    prevWorldId === null ||
+                    fetchedWorlds.every((world) => world.id !== prevWorldId)
+                ) {
+                    return fetchedWorlds[0].id;
+                }
+
+                return prevWorldId;
+            } else {
+                return null;
             }
-        } else {
-            setSelectedWorldId(null);
-        }
-    }, [selectedWorldId, setSelectedWorldId]);
+        });
+    }, []);
 
     const renameWorldFactory = (id: number) => {
         return async (newName: string) => {
@@ -79,6 +83,30 @@ export function WorldsPage() {
     useEffect(() => {
         fetchWorlds();
     }, [fetchWorlds]);
+
+    useEffect(() => {
+        const handleKeyDown = (event: KeyboardEvent) => {
+            const currentIndex = worlds.findIndex(
+                (world) => world.id === selectedWorldId
+            );
+
+            if (event.key === 'ArrowUp' && currentIndex > 0) {
+                setSelectedWorldId(worlds[currentIndex - 1].id);
+            } else if (
+                event.key === 'ArrowDown' &&
+                currentIndex < worlds.length - 1
+            ) {
+                setSelectedWorldId(worlds[currentIndex + 1].id);
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+
+        // Cleanup the event listener
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [selectedWorldId, setSelectedWorldId, worlds]);
 
     return (
         <div className={styles.worlds_page}>
