@@ -38,7 +38,7 @@ export function WorldsPage() {
                 return null;
             }
         });
-    }, []);
+    }, [setSelectedWorldId]);
 
     const renameWorldFactory = (id: number) => {
         return async (newName: string) => {
