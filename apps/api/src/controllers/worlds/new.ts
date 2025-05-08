@@ -5,7 +5,9 @@ import { msg } from '../../utils/response';
 export async function createNewWorld(req: Request, res: Response) {
     const { name } = req.body;
 
-    const worldExists = await World.findOne({ where: { name } });
+    const worldExists = await World.findOne({
+        where: { name, userId: req.user.id },
+    });
 
     if (worldExists) {
         res.status(409).send(msg(`world ${name} exists already`));
