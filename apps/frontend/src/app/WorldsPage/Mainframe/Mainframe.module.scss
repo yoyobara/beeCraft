@@ -1,1 +1,19 @@
 @use "../../../colors.scss" as *;
+
+.table_container {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+.table_heading {
+	text-decoration: underline;
+	color: $text-secondary;
+}
+
+.table {
+	width: 100%;
+	margin: 2% 3%;
+	border-radius: 16px;
+	background-color: $bg-light;
+}
