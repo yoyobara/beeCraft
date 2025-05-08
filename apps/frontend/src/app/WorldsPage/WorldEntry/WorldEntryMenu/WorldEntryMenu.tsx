@@ -10,12 +10,14 @@ interface WorldEntryMenuProps {
     threeDotsRef: React.RefObject<HTMLImageElement | null>;
     setOptionsMenuVisible: React.Dispatch<React.SetStateAction<boolean>>;
     handleRename: () => Promise<void>;
+    handleDelete: () => Promise<void>;
 }
 
 export function WorldEntryMenu({
     position,
     setOptionsMenuVisible,
     handleRename,
+    handleDelete,
     threeDotsRef,
 }: WorldEntryMenuProps) {
     useEffect(() => {
@@ -43,15 +45,9 @@ export function WorldEntryMenu({
                 rename
             </Button>
 
-            {/* <Button
-                onClick={() => {
-                    deleteWorld(worldId);
-                }}
-                kind="text"
-                variant="primary"
-            >
+            <Button onClick={handleDelete} kind="text" variant="primary">
                 delete
-            </Button> */}
+            </Button>
         </div>
     );
 }

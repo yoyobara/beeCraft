@@ -9,6 +9,7 @@ interface WorldEntryProps {
     isSelected: boolean;
     onClick: React.MouseEventHandler<HTMLDivElement>;
     renameWorld: (newName: string) => Promise<boolean>;
+    deleteWorld: () => Promise<boolean>;
 }
 
 export function WorldEntry({
@@ -16,6 +17,7 @@ export function WorldEntry({
     isSelected,
     onClick,
     renameWorld,
+    deleteWorld,
 }: WorldEntryProps) {
     const [optionsMenuPosition, setOptionsMenuPosition] = useState<null | {
         x: number;
@@ -89,6 +91,9 @@ export function WorldEntry({
                     position={optionsMenuPosition}
                     setOptionsMenuVisible={() => setOptionsMenuPosition(null)}
                     handleRename={startRename}
+                    handleDelete={async () => {
+                        await deleteWorld();
+                    }}
                     threeDotsRef={threeDotsRef}
                 />
             )}

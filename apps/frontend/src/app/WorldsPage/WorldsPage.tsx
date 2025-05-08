@@ -56,6 +56,26 @@ export function WorldsPage() {
         };
     };
 
+    const deleteWorldFactory = (id: number) => {
+        return async () => {
+            const { status } = await axios.post(
+                'http://localhost:3333/world/delete',
+
+                { worldId: id },
+
+                {
+                    withCredentials: true,
+                    validateStatus: (status) =>
+                        [200, 404, 403].includes(status),
+                }
+            );
+
+            await fetchWorlds();
+
+            return status === 200;
+        };
+    };
+
     useEffect(() => {
         fetchWorlds();
     }, [fetchWorlds]);
@@ -72,6 +92,7 @@ export function WorldsPage() {
                             setSelectedWorldId(world.id);
                         }}
                         renameWorld={renameWorldFactory(world.id)}
+                        deleteWorld={deleteWorldFactory(world.id)}
                     />
                 ))}
             </div>

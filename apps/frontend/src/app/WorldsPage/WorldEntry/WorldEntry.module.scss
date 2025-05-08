@@ -36,8 +36,8 @@
 	height: 1em;
 	opacity: 0;
 	cursor: pointer;
+}
 
-	&:hover {
-		opacity: 1;
-	}
+.world_entry:hover .three_dots {
+	opacity: 1;
 }
