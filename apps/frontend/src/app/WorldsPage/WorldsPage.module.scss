@@ -1,21 +1,18 @@
-.landing_page {
-	margin: 3%;
-	text-wrap-style: balance;
-}
+@use "../../colors.scss" as *;
 
-.headline {
-	font-size: 7em;
-	font-weight: 600;
-}
-
-.subtext {
-	font-size: 2em;
-	font-weight: 400;
-}
-
-.buttons {
+.worlds_page {
+	height: 100%;
 	display: flex;
-	gap: 2%;
-	margin: 3% 0;
-	font-size: 5em;
+	flex-direction: row;
+}
+
+.mainframe {
+	flex: 5;
+}
+
+.sidebar {
+	flex: 1;
+	background-color: $bg-light;
+	opacity: 0.9;
+	font-size: 2.5em;
 }

@@ -1,0 +1,43 @@
+@use "../../../colors.scss" as *;
+
+.world_entry {
+	margin: 3%;
+	padding: 2%;
+
+	background-color: $secondary;
+	border-radius: 5px;
+
+	display: flex;
+	align-items: center;
+	column-gap: 20px;
+
+	border: ridge 5px transparent;
+
+	&.selected {
+		border-color: $primary;
+	}
+}
+
+.world_name {
+	flex-grow: 1;
+	width: 200px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	outline: none;
+	border: none;
+	background-color: transparent;
+	font-size: 1em;
+}
+
+.three_dots {
+	width: 1em;
+	height: 1em;
+	opacity: 0;
+	cursor: pointer;
+}
+
+.world_entry:hover .three_dots {
+	opacity: 1;
+}
