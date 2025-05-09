@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
 import styles from './Mainframe.module.scss';
-import { PointEntry, PointOfInterest } from './PointEntry/PointEntry';
+import { PointEntry, PointOfInterest } from './PointEntry';
 
 interface MainframeProps {
     worldId: number;
