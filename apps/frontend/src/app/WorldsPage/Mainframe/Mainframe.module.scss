@@ -2,8 +2,10 @@
 
 .table_container {
 	width: 100%;
-	display: flex;
-	justify-content: center;
+	margin: 2% 3%;
+	padding: 1%;
+	border-radius: 16px;
+	background-color: $bg-light;
 }
 
 .table_heading {
@@ -13,10 +15,6 @@
 
 .table {
 	width: 100%;
-	margin: 2% 3%;
-	padding: 1%;
-	border-radius: 16px;
-	background-color: $bg-light;
 	table-layout: fixed;
 	text-align: left;
 	border-collapse: collapse;
