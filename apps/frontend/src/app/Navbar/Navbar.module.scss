@@ -1,41 +1,22 @@
 @use "../../colors.scss" as *;
 
 .navbar {
-    background-color: $bg-light;
-    border-bottom: 5px solid $border;
-    font-size: 1.5em;
-    opacity: 0.9;
-
-    display: flex;
-    column-gap: 2%;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1%;
 }
 
 .current_page_button {
-    text-decoration: underline;
 }
 
 .icon {
-    width: 5em;
 }
 
 .avatar_icon {
-    width: 3.5em;
 }
 
 .about {
-    margin-right: auto;
 }
 
 .title {
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 3em;
 }
 
 .name {
-    font-size: 1.5em;
-    font-weight: 200;
 }

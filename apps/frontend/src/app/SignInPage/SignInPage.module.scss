@@ -1,25 +1,13 @@
 @use "../../colors.scss" as *;
 
 .sign_in {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	font-size: 2.5em;
-	width: 30%;
-	margin: auto;
 }
 
 .input {
-	width: 100%;
-	margin: 3% 0;
 }
 
 .submit {
-	margin-top: 10%;
-	width: 80%;
 }
 
 .error_message {
-	font-size: 0.8em;
-	color: $error;
 }

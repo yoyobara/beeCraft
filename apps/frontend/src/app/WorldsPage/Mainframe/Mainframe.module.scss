@@ -1,27 +1,10 @@
 @use "../../../colors.scss" as *;
 
 .table_container {
-	width: 100%;
-	margin: 2% 3%;
-	padding: 1%;
-	border-radius: 16px;
-	background-color: $bg-light;
-	min-width: 0;
 }
 
 .table_heading {
-	text-decoration: underline;
-	color: $text-secondary;
 }
 
 .table {
-	width: 100%;
-	overflow-y: scroll;
-	table-layout: fixed;
-	text-align: left;
-	border-collapse: collapse;
-}
-
-.table th,td {
-	padding: 2%;
 }
