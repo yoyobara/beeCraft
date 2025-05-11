@@ -10,5 +10,6 @@
 }
 
 .rest_of_page {
-	height: 100%;
+	overflow: hidden;
+	flex: 1;
 }
