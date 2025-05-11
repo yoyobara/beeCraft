@@ -8,7 +8,8 @@ export function LandingPage() {
     return (
         <div className={styles.landing_page}>
             <div className={styles.headline}>
-                Start managing your worlds effortlessly
+                Manage your <br />
+                worlds effortlessly
             </div>
             <div className={styles.subtext}>
                 BeeCraft let's you manage known data about your worlds with ease

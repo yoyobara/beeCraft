@@ -1,0 +1,23 @@
+.landing_page {
+	margin: 1rem 7rem;
+	text-wrap-style: balance;
+}
+
+.headline {
+	font-size: 7rem;
+	font-weight: 600;
+	text-decoration: underline;
+}
+
+.subtext {
+	margin-top: 2rem;
+	margin-bottom: 3rem;
+	font-size: 2rem;
+	font-weight: 400;
+}
+
+.buttons {
+	display: flex;
+	gap: 1rem;
+	font-size: 4rem;
+}

@@ -1,10 +1,18 @@
 @use "../../colors.scss" as *;
 
 .worlds_page {
-}
-
-.mainframe {
+	height: 100%;
+	display: flex;
 }
 
 .sidebar {
+	width: 20%;
+	background-color: $bg-light;
+	opacity: 0.9;
+}
+
+.mainframe {
+	display: flex;
+	justify-content: center;
+	flex: 1;
 }

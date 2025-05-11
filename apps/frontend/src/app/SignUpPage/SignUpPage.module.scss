@@ -1,13 +1,18 @@
 @use "../../colors.scss" as *;
 
 .signup {
-}
-
-.input {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1rem;
+	font-size: 3rem;
 }
 
 .submit {
+	margin: 2rem
 }
 
 .error_message {
+	color: $error;
+	font-size: 2rem;
 }

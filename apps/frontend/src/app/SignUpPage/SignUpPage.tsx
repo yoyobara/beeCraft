@@ -68,7 +68,6 @@ export function SignUpPage() {
                 variant="primary"
                 type="text"
                 placeholder="email"
-                className={styles.input}
                 onChange={(e) => {
                     setEmail(e.target.value);
                     setErrorMsg(null);
@@ -78,7 +77,6 @@ export function SignUpPage() {
                 variant="primary"
                 type="text"
                 placeholder="full name"
-                className={styles.input}
                 onChange={(e) => {
                     setFullName(e.target.value);
                     setErrorMsg(null);
