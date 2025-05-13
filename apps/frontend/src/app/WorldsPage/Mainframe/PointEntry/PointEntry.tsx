@@ -1,5 +1,7 @@
 import styles from './PointEntry.module.scss';
 
+type Dimension = 'overworld' | 'nether' | 'end';
+
 export interface PointOfInterest {
     id: number;
     name: string;
@@ -7,7 +9,7 @@ export interface PointOfInterest {
     y: number | null;
     z: number;
     notes: string | null;
-    isEnd: boolean;
+    dimension: Dimension;
 }
 
 interface PointEntryProps {
@@ -21,7 +23,7 @@ export function PointEntry({ data }: PointEntryProps) {
             <td>{data.x}</td>
             <td>{data.y}</td>
             <td>{data.z}</td>
-            <td>{data.notes + ' ' + data.isEnd}</td>
+            <td>{data.notes + ' ' + data.dimension}</td>
         </tr>
     );
 }

@@ -42,9 +42,9 @@ export class PointOfInterest extends Model<
     @Attribute(DataTypes.TEXT)
     declare notes: string | null;
 
-    @Attribute(DataTypes.BOOLEAN)
+    @Attribute(DataTypes.ENUM('overworld', 'nether', 'end'))
     @NotNull
-    declare isEnd: boolean;
+    declare dimension: string;
 
     @DeletedAt
     declare deletedAt: Date | null;
