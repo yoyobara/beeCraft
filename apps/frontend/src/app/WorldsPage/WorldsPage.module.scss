@@ -3,16 +3,17 @@
 .worlds_page {
 	height: 100%;
 	display: flex;
-	flex-direction: row;
-}
-
-.mainframe {
-	flex: 5;
 }
 
 .sidebar {
-	flex: 1;
+	width: 20%;
 	background-color: $bg-light;
 	opacity: 0.9;
-	font-size: 2.5em;
+	overflow-y: scroll;
+}
+
+.mainframe {
+	display: flex;
+	justify-content: center;
+	flex: 1;
 }

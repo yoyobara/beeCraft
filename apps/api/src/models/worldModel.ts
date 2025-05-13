@@ -7,6 +7,7 @@ import {
     ForeignKey,
     NonAttribute,
     HasManyGetAssociationsMixin,
+    HasManyCreateAssociationMixin,
 } from '@sequelize/core';
 import {
     PrimaryKey,
@@ -46,4 +47,8 @@ export class World extends Model<
     })
     declare points: NonAttribute<PointOfInterest>;
     declare getPoints: HasManyGetAssociationsMixin<PointOfInterest>;
+    declare createPoint: HasManyCreateAssociationMixin<
+        PointOfInterest,
+        'worldId'
+    >;
 }

@@ -24,6 +24,10 @@ export class PointOfInterest extends Model<
     @AutoIncrement
     declare id: CreationOptional<number>;
 
+    @Attribute(DataTypes.TEXT)
+    @NotNull
+    declare name: string;
+
     @Attribute(DataTypes.INTEGER)
     @NotNull
     declare x: number;

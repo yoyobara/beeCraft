@@ -3,6 +3,7 @@ import useLocalStorage from 'use-local-storage';
 import axios from 'axios';
 import styles from './WorldsPage.module.scss';
 import { WorldEntry } from './WorldEntry';
+import { Mainframe } from './Mainframe';
 
 interface World {
     id: number;
@@ -38,7 +39,7 @@ export function WorldsPage() {
                 return null;
             }
         });
-    }, []);
+    }, [setSelectedWorldId]);
 
     const renameWorldFactory = (id: number) => {
         return async (newName: string) => {
@@ -126,7 +127,9 @@ export function WorldsPage() {
             </div>
 
             <div className={styles.mainframe}>
-                this is the mainframe for id {selectedWorldId}
+                {selectedWorldId !== null && (
+                    <Mainframe worldId={selectedWorldId} />
+                )}
             </div>
         </div>
     );

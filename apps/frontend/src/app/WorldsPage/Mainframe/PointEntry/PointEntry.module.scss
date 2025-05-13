@@ -1,0 +1,8 @@
+@use 'sass:color';
+@use "../../../../colors.scss" as *;
+
+.row {
+	&:hover {
+		background-color: color.adjust($color: $secondary, $lightness: 25%);
+	}
+}

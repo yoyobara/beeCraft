@@ -59,14 +59,12 @@ export function SignInPage() {
                 variant="primary"
                 type="email"
                 placeholder="email"
-                className={styles.input}
                 onChange={(e) => setEmail(e.target.value)}
             />
             <Field
                 variant="primary"
                 type="password"
                 placeholder="password"
-                className={styles.input}
                 onChange={(e) => setPassword(e.target.value)}
             />
             {errorMsg && (

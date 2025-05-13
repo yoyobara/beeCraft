@@ -66,7 +66,7 @@ export function WorldEntry({
                             setNewName(ev.target.value);
                         }}
                         value={newName}
-                        onBlur={finishRename}
+                        // onBlur={finishRename}
                         onKeyDown={(ev) => {
                             ev.key === 'Enter' && finishRename();
                         }}
