@@ -30,11 +30,12 @@ export function Mainframe({ worldId }: MainframeProps) {
             <table className={styles.table}>
                 <thead>
                     <tr className={styles.table_heading}>
+                        <th style={{ width: '10%' }}></th>
                         <th style={{ width: '20%' }}>Name</th>
                         <th style={{ width: '10%' }}>X</th>
                         <th style={{ width: '10%' }}>Y</th>
                         <th style={{ width: '10%' }}>Z</th>
-                        <th style={{ width: '50%' }}>Notes</th>
+                        <th style={{ width: '40%' }}>Notes</th>
                     </tr>
                 </thead>
                 <tbody>
