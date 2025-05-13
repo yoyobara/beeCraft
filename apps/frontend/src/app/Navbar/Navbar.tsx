@@ -1,8 +1,7 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import clsx from 'clsx';
-import icon from '../../assets/beeNestIcon.png';
-import avatarIcon from '../../assets/avatar.webp';
+import { avatarIcon, beeNestIcon } from '../../assets';
 import { useAuth } from '../../hooks/auth';
 import { Button } from '../../components/Button';
 import styles from './Navbar.module.scss';
@@ -32,7 +31,11 @@ export function Navbar() {
 
     return (
         <div className={styles.navbar}>
-            <img className={styles.icon} src={icon} alt="beeCraft-icon" />
+            <img
+                className={styles.icon}
+                src={beeNestIcon}
+                alt="beeCraft-icon"
+            />
             <span className={styles.title} onClick={() => navgiate('/')}>
                 BeeCraft
             </span>

@@ -36,6 +36,7 @@ export function Mainframe({ worldId }: MainframeProps) {
                         <th style={{ width: '10%' }}>Y</th>
                         <th style={{ width: '10%' }}>Z</th>
                         <th style={{ width: '40%' }}>Notes</th>
+                        <th style={{ width: '3%' }}></th>
                     </tr>
                 </thead>
                 <tbody>

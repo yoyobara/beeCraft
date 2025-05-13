@@ -13,15 +13,15 @@ export interface PointOfInterest {
     dimension: Dimension;
 }
 
-interface PointEntryProps {
-    data: PointOfInterest;
-}
-
 const dimensionToIcon: Record<Dimension, string> = {
     overworld,
     nether,
     end,
 };
+
+interface PointEntryProps {
+    data: PointOfInterest;
+}
 
 export function PointEntry({ data }: PointEntryProps) {
     return (
@@ -38,6 +38,7 @@ export function PointEntry({ data }: PointEntryProps) {
             <td>{data.y}</td>
             <td>{data.z}</td>
             <td>{data.notes}</td>
+            <td className={styles.buttons}></td>
         </tr>
     );
 }
