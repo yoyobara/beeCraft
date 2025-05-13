@@ -1,12 +1,6 @@
 @use 'sass:color';
 @use "../../../../colors.scss" as *;
 
-.row {
-	&:hover {
-		background-color: color.adjust($color: $secondary, $lightness: 25%);
-	}
-}
-
 .dimension_icon {
 	width: 60%;
 }
@@ -14,4 +8,18 @@
 .buttons {
 	display: flex;
 	flex-direction: column;
+	padding: 0.1rem;
+	opacity: 0;
+}
+
+.button {
+	padding: 0.3rem;
+}
+
+.row:hover {
+	background-color: color.adjust($color: $secondary, $lightness: 25%);
+
+	.buttons {
+		opacity: 1;
+	}
 }

@@ -1,3 +1,4 @@
+import { binIcon, editIcon, pinIcon } from '../../../../assets';
 import { overworld, nether, end } from '../../../../assets/dimension';
 import styles from './PointEntry.module.scss';
 
@@ -38,7 +39,11 @@ export function PointEntry({ data }: PointEntryProps) {
             <td>{data.y}</td>
             <td>{data.z}</td>
             <td>{data.notes}</td>
-            <td className={styles.buttons}></td>
+            <td className={styles.buttons}>
+                <img className={styles.button} src={pinIcon} alt="pin" />
+                <img className={styles.button} src={editIcon} alt="edit" />
+                <img className={styles.button} src={binIcon} alt="delete" />
+            </td>
         </tr>
     );
 }
