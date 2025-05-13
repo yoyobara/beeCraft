@@ -46,6 +46,9 @@ export class PointOfInterest extends Model<
     @NotNull
     declare dimension: string;
 
+    @Attribute(DataTypes.DATE)
+    declare pinnedAt: Date | null;
+
     @DeletedAt
     declare deletedAt: Date | null;
 

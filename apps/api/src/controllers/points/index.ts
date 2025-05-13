@@ -14,7 +14,20 @@ export async function getPoints(req: Request, res: Response) {
     }
 
     const points = await world.getPoints({
-        attributes: ['id', 'name', 'x', 'y', 'z', 'notes', 'dimension'],
+        attributes: [
+            'id',
+            'name',
+            'x',
+            'y',
+            'z',
+            'notes',
+            'dimension',
+            'pinnedAt',
+        ],
+        order: [
+            ['pinnedAt', 'DESC'],
+            ['createdAt', 'DESC'],
+        ],
     });
     return res.send(points);
 }
