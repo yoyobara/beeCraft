@@ -6,14 +6,16 @@ import { WorldEntryMenu } from './WorldEntryMenu';
 
 interface WorldEntryProps {
     name: string;
+    id: number;
     isSelected: boolean;
     onClick: React.MouseEventHandler<HTMLDivElement>;
-    renameWorld: (newName: string) => Promise<boolean>;
-    deleteWorld: () => Promise<boolean>;
+    renameWorld: (id: number, newName: string) => Promise<boolean>;
+    deleteWorld: (id: number) => Promise<boolean>;
 }
 
 export function WorldEntry({
     name,
+    id,
     isSelected,
     onClick,
     renameWorld,
@@ -36,7 +38,7 @@ export function WorldEntry({
 
     const finishRename = async () => {
         if (newName !== name) {
-            await renameWorld(newName);
+            await renameWorld(id, newName);
         }
 
         setIsEdit(false);
@@ -92,7 +94,7 @@ export function WorldEntry({
                     setOptionsMenuVisible={() => setOptionsMenuPosition(null)}
                     handleRename={startRename}
                     handleDelete={async () => {
-                        await deleteWorld();
+                        await deleteWorld(id);
                     }}
                     threeDotsRef={threeDotsRef}
                 />

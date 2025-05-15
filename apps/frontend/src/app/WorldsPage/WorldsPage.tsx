@@ -41,44 +41,39 @@ export function WorldsPage() {
         });
     }, [setSelectedWorldId]);
 
-    const renameWorldFactory = (id: number) => {
-        return async (newName: string) => {
-            const { status } = await axios.post(
-                'http://localhost:3333/world/rename',
+    const renameWorld = async (id: number, newName: string) => {
+        const { status } = await axios.post(
+            'http://localhost:3333/world/rename',
 
-                { worldId: id, newName },
+            { worldId: id, newName },
 
-                {
-                    withCredentials: true,
+            {
+                withCredentials: true,
 
-                    validateStatus: (status) => [200, 409].includes(status),
-                }
-            );
+                validateStatus: (status) => [200, 409].includes(status),
+            }
+        );
 
-            await fetchWorlds();
+        await fetchWorlds();
 
-            return status === 200;
-        };
+        return status === 200;
     };
 
-    const deleteWorldFactory = (id: number) => {
-        return async () => {
-            const { status } = await axios.post(
-                'http://localhost:3333/world/delete',
+    const deleteWorld = async (id: number) => {
+        const { status } = await axios.post(
+            'http://localhost:3333/world/delete',
 
-                { worldId: id },
+            { worldId: id },
 
-                {
-                    withCredentials: true,
-                    validateStatus: (status) =>
-                        [200, 404, 403].includes(status),
-                }
-            );
+            {
+                withCredentials: true,
+                validateStatus: (status) => [200, 404, 403].includes(status),
+            }
+        );
 
-            await fetchWorlds();
+        await fetchWorlds();
 
-            return status === 200;
-        };
+        return status === 200;
     };
 
     useEffect(() => {
@@ -115,13 +110,14 @@ export function WorldsPage() {
                 {worlds.map((world) => (
                     <WorldEntry
                         key={world.id}
+                        id={world.id}
                         name={world.name}
                         isSelected={world.id === selectedWorldId}
                         onClick={() => {
                             setSelectedWorldId(world.id);
                         }}
-                        renameWorld={renameWorldFactory(world.id)}
-                        deleteWorld={deleteWorldFactory(world.id)}
+                        renameWorld={renameWorld}
+                        deleteWorld={deleteWorld}
                     />
                 ))}
             </div>

@@ -12,6 +12,7 @@ export interface PointOfInterest {
     z: number;
     notes: string | null;
     dimension: Dimension;
+    pinnedAt: Date | null;
 }
 
 const dimensionToIcon: Record<Dimension, string> = {
