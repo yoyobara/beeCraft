@@ -1,4 +1,5 @@
 import {
+    BelongsToGetAssociationMixin,
     CreationOptional,
     DataTypes,
     ForeignKey,
@@ -54,4 +55,5 @@ export class PointOfInterest extends Model<
 
     @Attribute(DataTypes.INTEGER)
     declare worldId: ForeignKey<World['id']>;
+    declare getWorld: BelongsToGetAssociationMixin<World>;
 }
