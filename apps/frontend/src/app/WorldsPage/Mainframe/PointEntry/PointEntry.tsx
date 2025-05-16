@@ -43,6 +43,7 @@ export function PointEntry({ data, handlePinning }: PointEntryProps) {
             <td>{data.z}</td>
             <td>{data.notes}</td>
             <td className={styles.buttons}>
+                <img className={styles.button} src={editIcon} alt="edit" />
                 <img
                     className={clsx(
                         styles.button,
@@ -54,7 +55,6 @@ export function PointEntry({ data, handlePinning }: PointEntryProps) {
                         await handlePinning(data.id, !data.pinnedAt);
                     }}
                 />
-                <img className={styles.button} src={editIcon} alt="edit" />
                 <img className={styles.button} src={binIcon} alt="delete" />
             </td>
         </tr>
