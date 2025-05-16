@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { binIcon, editIcon, pinIcon } from '../../../../assets';
 import { overworld, nether, end } from '../../../../assets/dimension';
 import styles from './PointEntry.module.scss';
@@ -23,9 +24,10 @@ const dimensionToIcon: Record<Dimension, string> = {
 
 interface PointEntryProps {
     data: PointOfInterest;
+    handlePinning: (id: number, pin: boolean) => Promise<void>;
 }
 
-export function PointEntry({ data }: PointEntryProps) {
+export function PointEntry({ data, handlePinning }: PointEntryProps) {
     return (
         <tr className={styles.row}>
             <td>
@@ -41,7 +43,17 @@ export function PointEntry({ data }: PointEntryProps) {
             <td>{data.z}</td>
             <td>{data.notes}</td>
             <td className={styles.buttons}>
-                <img className={styles.button} src={pinIcon} alt="pin" />
+                <img
+                    className={clsx(
+                        styles.button,
+                        data.pinnedAt && styles.pinned
+                    )}
+                    src={pinIcon}
+                    alt="pin"
+                    onClick={async () => {
+                        await handlePinning(data.id, !data.pinnedAt);
+                    }}
+                />
                 <img className={styles.button} src={editIcon} alt="edit" />
                 <img className={styles.button} src={binIcon} alt="delete" />
             </td>

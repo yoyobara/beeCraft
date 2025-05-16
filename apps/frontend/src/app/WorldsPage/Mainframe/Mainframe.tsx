@@ -25,6 +25,21 @@ export function Mainframe({ worldId }: MainframeProps) {
         fetchPoints();
     }, [fetchPoints]);
 
+    const handlePinning = useCallback(
+        async (id: number, pin: boolean) => {
+            const pinnedAt = pin ? new Date(Date.now()) : null;
+
+            await axios.patch(
+                'http://localhost:3333/points/edit',
+                { pointId: id, pointPatch: { pinnedAt } },
+                { withCredentials: true }
+            );
+
+            await fetchPoints();
+        },
+        [fetchPoints]
+    );
+
     return (
         <div className={styles.table_container}>
             <table className={styles.table}>
@@ -41,7 +56,11 @@ export function Mainframe({ worldId }: MainframeProps) {
                 </thead>
                 <tbody>
                     {points.map((point) => (
-                        <PointEntry key={point.id} data={point} />
+                        <PointEntry
+                            key={point.id}
+                            handlePinning={handlePinning}
+                            data={point}
+                        />
                     ))}
                 </tbody>
             </table>

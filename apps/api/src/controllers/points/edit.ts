@@ -17,7 +17,7 @@ export async function patchPoint(req: Request, res: Response) {
             .send(msg("you don't have access to view this world"));
     }
 
-    if (point.name !== pointPatch.name) {
+    if (pointPatch.name && point.name !== pointPatch.name) {
         const pointsWithSameName = await world.getPoints({
             where: { name: pointPatch.name },
         });
