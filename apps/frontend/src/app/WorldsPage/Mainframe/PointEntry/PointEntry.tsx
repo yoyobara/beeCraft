@@ -25,9 +25,14 @@ const dimensionToIcon: Record<Dimension, string> = {
 interface PointEntryProps {
     data: PointOfInterest;
     handlePinning: (id: number, pin: boolean) => Promise<void>;
+    handleDeletion: (id: number) => Promise<void>;
 }
 
-export function PointEntry({ data, handlePinning }: PointEntryProps) {
+export function PointEntry({
+    data,
+    handlePinning,
+    handleDeletion,
+}: PointEntryProps) {
     return (
         <tr className={styles.row}>
             <td>
@@ -43,6 +48,7 @@ export function PointEntry({ data, handlePinning }: PointEntryProps) {
             <td>{data.z}</td>
             <td>{data.notes}</td>
             <td className={styles.buttons}>
+                <img className={styles.button} src={editIcon} alt="edit" />
                 <img
                     className={clsx(
                         styles.button,
@@ -50,12 +56,18 @@ export function PointEntry({ data, handlePinning }: PointEntryProps) {
                     )}
                     src={pinIcon}
                     alt="pin"
-                    onClick={async () => {
-                        await handlePinning(data.id, !data.pinnedAt);
+                    onClick={() => {
+                        handlePinning(data.id, !data.pinnedAt);
                     }}
                 />
-                <img className={styles.button} src={editIcon} alt="edit" />
-                <img className={styles.button} src={binIcon} alt="delete" />
+                <img
+                    className={styles.button}
+                    src={binIcon}
+                    alt="delete"
+                    onClick={() => {
+                        handleDeletion(data.id);
+                    }}
+                />
             </td>
         </tr>
     );

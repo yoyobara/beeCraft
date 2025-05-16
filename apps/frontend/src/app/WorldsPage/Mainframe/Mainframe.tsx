@@ -40,6 +40,19 @@ export function Mainframe({ worldId }: MainframeProps) {
         [fetchPoints]
     );
 
+    const handleDeletion = useCallback(
+        async (id: number) => {
+            await axios.post(
+                'http://localhost:3333/points/delete',
+                { pointId: id },
+                { withCredentials: true }
+            );
+
+            await fetchPoints();
+        },
+        [fetchPoints]
+    );
+
     return (
         <div className={styles.table_container}>
             <table className={styles.table}>
@@ -58,8 +71,9 @@ export function Mainframe({ worldId }: MainframeProps) {
                     {points.map((point) => (
                         <PointEntry
                             key={point.id}
-                            handlePinning={handlePinning}
                             data={point}
+                            handlePinning={handlePinning}
+                            handleDeletion={handleDeletion}
                         />
                     ))}
                 </tbody>
