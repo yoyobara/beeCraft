@@ -61,7 +61,7 @@ export function PointEntry({
                     }}
                 />
                 <img
-                    className={styles.button}
+                    className={clsx(styles.button, styles.delete_button)}
                     src={binIcon}
                     alt="delete"
                     onClick={() => {

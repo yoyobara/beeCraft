@@ -14,9 +14,14 @@
 .button {
 	padding: 0.3rem;
 	opacity: 0;
+	cursor: pointer;
 
 	&.pinned {
 		opacity: 0.3;
+	}
+
+	&.delete_button:hover {
+		filter: invert(19%) sepia(83%) saturate(5451%) hue-rotate(0deg) brightness(92%) contrast(103%);
 	}
 }
 
