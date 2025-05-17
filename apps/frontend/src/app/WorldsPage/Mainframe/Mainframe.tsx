@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
+import { plusIcon } from '../../../assets';
 import styles from './Mainframe.module.scss';
 import { PointEntry, PointOfInterest } from './PointEntry';
 import { AdditionModal } from './AdditionModal';
@@ -57,6 +58,16 @@ export function Mainframe({ worldId }: MainframeProps) {
 
     return (
         <div className={styles.table_container}>
+            <div className={styles.actions_row}>
+                <img
+                    className={styles.plus_button}
+                    src={plusIcon}
+                    alt="new point"
+                    onClick={() => {
+                        setAdditionModalOpen(true);
+                    }}
+                />
+            </div>
             <table className={styles.table}>
                 <thead>
                     <tr className={styles.table_heading}>
@@ -86,6 +97,7 @@ export function Mainframe({ worldId }: MainframeProps) {
                         console.log('saving fields');
                         setAdditionModalOpen(false);
                     }}
+                    setAdditionModalOpen={setAdditionModalOpen}
                 />
             )}
         </div>

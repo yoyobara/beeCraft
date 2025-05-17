@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import {
     Dimension,
     DimensionDisplay,
@@ -20,9 +20,13 @@ interface newPointFields {
 
 interface AdditionModalProps {
     onSave: (fields: newPointFields) => void;
+    setAdditionModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export function AdditionModal({ onSave }: AdditionModalProps) {
+export function AdditionModal({
+    onSave,
+    setAdditionModalOpen,
+}: AdditionModalProps) {
     const [name, setName] = useState<string>('');
     const [dimensionIndex, setDimensionIndex] = useState<number>(0);
     const [x, setX] = useState<string>('');
@@ -33,7 +37,12 @@ export function AdditionModal({ onSave }: AdditionModalProps) {
     const dimension = DIMENSIONS[dimensionIndex % DIMENSIONS.length];
 
     return (
-        <div className={styles.overlay}>
+        <div
+            className={styles.overlay}
+            onClick={(ev) => {
+                ev.target === ev.currentTarget && setAdditionModalOpen(false);
+            }}
+        >
             <div className={styles.modal}>
                 <Field
                     className={styles.name}
