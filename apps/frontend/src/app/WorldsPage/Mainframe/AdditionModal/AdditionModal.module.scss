@@ -4,5 +4,58 @@
 	top: 0;
 	width: 100vw;
 	height: 100vh;
-	background-color: slategray;
+	z-index: 999;
+
+	background-color: rgba($color: darkgrey, $alpha: 0.65);
+}
+
+.modal {
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	width: 30vw;
+	height: 40vh;
+
+	margin: auto;
+	padding: 2rem;
+
+	display: grid;
+	grid-template-columns: repeat(15, 1fr);
+	grid-template-rows: repeat(4, 1fr);
+	gap: 2rem;
+
+	font-size: 2rem;
+	background-color: white;
+	border-radius: 8px;
+}
+
+.name {
+	grid-row: 1;
+	grid-column: 1 / span 12;
+}
+
+.dimension {
+	grid-row: 1;
+	grid-column: 13 / span 3;
+
+	width: 100%;
+}
+
+.coordinate {
+	grid-row: 2;
+	grid-column: auto / span 5;
+	min-width: 0;
+	text-align: center;
+}
+
+.notes {
+	grid-row: 3;
+	grid-column: 1 / span 15;
+}
+
+.save_button {
+	grid-row: 4;
+	grid-column: 3 / span 11;
 }

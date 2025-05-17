@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
 import styles from './Mainframe.module.scss';
 import { PointEntry, PointOfInterest } from './PointEntry';
+import { AdditionModal } from './AdditionModal';
 
 interface MainframeProps {
     worldId: number;
@@ -55,6 +56,7 @@ export function Mainframe({ worldId }: MainframeProps) {
 
     return (
         <div className={styles.table_container}>
+            <AdditionModal />
             <table className={styles.table}>
                 <thead>
                     <tr className={styles.table_heading}>
