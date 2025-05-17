@@ -9,7 +9,7 @@ import styles from './AdditionModal.module.scss';
 
 const DIMENSIONS: Array<Dimension> = ['overworld', 'nether', 'end'];
 
-interface newPointFields {
+export interface newPointFields {
     name: string;
     dimension: Dimension;
     x: number;

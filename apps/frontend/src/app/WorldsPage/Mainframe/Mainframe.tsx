@@ -4,6 +4,7 @@ import { plusIcon } from '../../../assets';
 import styles from './Mainframe.module.scss';
 import { PointEntry, PointOfInterest } from './PointEntry';
 import { AdditionModal } from './AdditionModal';
+import { newPointFields } from './AdditionModal/AdditionModal';
 
 interface MainframeProps {
     worldId: number;
@@ -56,6 +57,24 @@ export function Mainframe({ worldId }: MainframeProps) {
         [fetchPoints]
     );
 
+    const handleNew = useCallback(
+        async (fields: newPointFields) => {
+            await axios.post(
+                'http://localhost:3333/points/new',
+                {
+                    worldId,
+                    point: fields,
+                },
+                {
+                    withCredentials: true,
+                }
+            );
+
+            await fetchPoints();
+        },
+        [fetchPoints, worldId]
+    );
+
     return (
         <div className={styles.table_container}>
             <div className={styles.actions_row}>
@@ -94,8 +113,8 @@ export function Mainframe({ worldId }: MainframeProps) {
             {additionModalOpen && (
                 <AdditionModal
                     onSave={(fields) => {
-                        console.log('saving fields');
                         setAdditionModalOpen(false);
+                        handleNew(fields);
                     }}
                     setAdditionModalOpen={setAdditionModalOpen}
                 />
