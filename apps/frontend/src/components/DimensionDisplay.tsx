@@ -11,17 +11,20 @@ const dimensionToIcon: Record<Dimension, string> = {
 interface DimensionDisplayProps {
     className?: string;
     dimension: Dimension;
+    onClick?: () => void;
 }
 
 export function DimensionDisplay({
     className,
     dimension,
+    onClick,
 }: DimensionDisplayProps) {
     return (
         <img
             className={className}
             src={dimensionToIcon[dimension]}
             alt={`[${dimension}]`}
+            onClick={onClick}
         />
     );
 }

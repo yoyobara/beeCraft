@@ -10,6 +10,7 @@ interface MainframeProps {
 
 export function Mainframe({ worldId }: MainframeProps) {
     const [points, setPoints] = useState<PointOfInterest[]>([]);
+    const [additionModalOpen, setAdditionModalOpen] = useState<boolean>(false);
 
     const fetchPoints = useCallback(async () => {
         const fetchedPoints = await axios.get('http://localhost:3333/points', {
@@ -56,7 +57,6 @@ export function Mainframe({ worldId }: MainframeProps) {
 
     return (
         <div className={styles.table_container}>
-            <AdditionModal />
             <table className={styles.table}>
                 <thead>
                     <tr className={styles.table_heading}>
@@ -80,6 +80,14 @@ export function Mainframe({ worldId }: MainframeProps) {
                     ))}
                 </tbody>
             </table>
+            {additionModalOpen && (
+                <AdditionModal
+                    onSave={(fields) => {
+                        console.log('saving fields');
+                        setAdditionModalOpen(false);
+                    }}
+                />
+            )}
         </div>
     );
 }
