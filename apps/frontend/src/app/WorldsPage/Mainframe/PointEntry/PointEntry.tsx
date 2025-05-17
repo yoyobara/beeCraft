@@ -1,9 +1,10 @@
 import clsx from 'clsx';
 import { binIcon, editIcon, pinIcon } from '../../../../assets';
-import { overworld, nether, end } from '../../../../assets/dimension';
+import {
+    Dimension,
+    DimensionDisplay,
+} from '../../../../components/DimensionDisplay';
 import styles from './PointEntry.module.scss';
-
-type Dimension = 'overworld' | 'nether' | 'end';
 
 export interface PointOfInterest {
     id: number;
@@ -15,12 +16,6 @@ export interface PointOfInterest {
     dimension: Dimension;
     pinnedAt: Date | null;
 }
-
-const dimensionToIcon: Record<Dimension, string> = {
-    overworld,
-    nether,
-    end,
-};
 
 interface PointEntryProps {
     data: PointOfInterest;
@@ -36,10 +31,9 @@ export function PointEntry({
     return (
         <tr className={styles.row}>
             <td>
-                <img
+                <DimensionDisplay
                     className={styles.dimension_icon}
-                    src={dimensionToIcon[data.dimension]}
-                    alt={`[${data.dimension}]`}
+                    dimension={data.dimension}
                 />
             </td>
             <td>{data.name}</td>

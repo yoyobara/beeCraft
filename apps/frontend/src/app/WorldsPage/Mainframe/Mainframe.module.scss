@@ -26,6 +26,16 @@
 	border-collapse: collapse;
 }
 
-.table th,td {
+.table th, td {
 	padding: 1rem;
+}
+
+.actions_row {
+	padding: 1rem;
+	border-bottom: $border solid 5px;
+
+	.plus_button {
+		width: 2rem;
+		cursor: pointer;
+	}
 }
