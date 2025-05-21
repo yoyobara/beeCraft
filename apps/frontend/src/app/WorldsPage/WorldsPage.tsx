@@ -18,7 +18,7 @@ export function WorldsPage() {
 
     const fetchWorlds = useCallback(async () => {
         const fetchedWorlds = (
-            await axios.get<World[]>('http://localhost:3333/world/all', {
+            await axios.get<World[]>('/world/all', {
                 withCredentials: true,
             })
         ).data;
@@ -43,7 +43,7 @@ export function WorldsPage() {
 
     const renameWorld = async (id: number, newName: string) => {
         const { status } = await axios.post(
-            'http://localhost:3333/world/rename',
+            '/world/rename',
 
             { worldId: id, newName },
 
@@ -61,7 +61,7 @@ export function WorldsPage() {
 
     const deleteWorld = async (id: number) => {
         const { status } = await axios.post(
-            'http://localhost:3333/world/delete',
+            '/world/delete',
 
             { worldId: id },
 

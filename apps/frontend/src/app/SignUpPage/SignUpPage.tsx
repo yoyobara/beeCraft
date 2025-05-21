@@ -41,7 +41,7 @@ export function SignUpPage() {
         }
 
         const response = await axios.post(
-            'http://localhost:3333/user/register',
+            '/user/register',
             {
                 email,
                 fullName,

@@ -15,7 +15,7 @@ export function Mainframe({ worldId }: MainframeProps) {
     const [additionModalOpen, setAdditionModalOpen] = useState<boolean>(false);
 
     const fetchPoints = useCallback(async () => {
-        const fetchedPoints = await axios.get('http://localhost:3333/points', {
+        const fetchedPoints = await axios.get('/points', {
             params: {
                 worldId,
             },
@@ -34,7 +34,7 @@ export function Mainframe({ worldId }: MainframeProps) {
             const pinnedAt = pin ? new Date(Date.now()) : null;
 
             await axios.patch(
-                'http://localhost:3333/points/edit',
+                '/points/edit',
                 { pointId: id, pointPatch: { pinnedAt } },
                 { withCredentials: true }
             );
@@ -47,7 +47,7 @@ export function Mainframe({ worldId }: MainframeProps) {
     const handleDeletion = useCallback(
         async (id: number) => {
             await axios.post(
-                'http://localhost:3333/points/delete',
+                '/points/delete',
                 { pointId: id },
                 { withCredentials: true }
             );
@@ -60,7 +60,7 @@ export function Mainframe({ worldId }: MainframeProps) {
     const handleNew = useCallback(
         async (fields: newPointFields) => {
             await axios.post(
-                'http://localhost:3333/points/new',
+                '/points/new',
                 {
                     worldId,
                     point: fields,

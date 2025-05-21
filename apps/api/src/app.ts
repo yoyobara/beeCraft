@@ -7,7 +7,10 @@ import { userRouter, worldRouter } from './routes';
 import { pointsRouter } from './routes/points';
 
 const app: Express = express();
-const ORIGIN = 'http://localhost:4200';
+const ORIGIN =
+    process.env.NODE_ENV === 'production'
+        ? 'http://localhost/'
+        : 'http://localhost:4200/';
 
 app.use(express.json());
 

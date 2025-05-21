@@ -33,7 +33,7 @@ export function SignInPage() {
         }
 
         const { status, data } = await axios.post(
-            'http://localhost:3333/user/login',
+            '/user/login',
             {
                 email,
                 password,
