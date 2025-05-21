@@ -6,8 +6,6 @@ import { sessionHandler } from './middlewares/session';
 import { userRouter, worldRouter } from './routes';
 import { pointsRouter } from './routes/points';
 
-console.log('running in', process.env.NODE_ENV);
-
 const app: Express = express();
 const ORIGIN =
     process.env.NODE_ENV === 'production'
@@ -15,11 +13,6 @@ const ORIGIN =
         : 'http://localhost:4200/';
 
 app.use(express.json());
-
-app.use((req, res, next) => {
-    console.log('got request', req.url, req.originalUrl);
-    next();
-});
 
 app.use(
     cors({

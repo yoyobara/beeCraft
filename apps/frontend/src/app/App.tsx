@@ -29,7 +29,6 @@ export function Private({
 }
 
 export function App() {
-    console.log(process.env.NX_PUBLIC_API_URL);
     return (
         <div className={styles.app}>
             <Navbar />
