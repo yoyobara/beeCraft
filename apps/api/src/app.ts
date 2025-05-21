@@ -17,7 +17,7 @@ const ORIGIN =
 app.use(express.json());
 
 app.use((req, res, next) => {
-    console.log('got request');
+    console.log('got request', req.url, req.originalUrl);
     next();
 });
 
