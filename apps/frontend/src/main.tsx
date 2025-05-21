@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { App } from './app/App';
 import { AuthProvider } from './hooks/auth';
 
-axios.defaults.baseURL = process.env.NX_PUBLIC_API_URL;
+axios.defaults.baseURL = '/api';
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement

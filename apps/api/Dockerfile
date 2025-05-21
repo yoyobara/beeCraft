@@ -15,6 +15,8 @@ WORKDIR /app
 COPY --from=builder /app/apps/api/dist/ .
 RUN npm ci
 
+ENV SESSION_SECRET=GUqWb/05pElEMvqRBcwErjrpmRXtc7Dd1bBqaHx/4zc=
+
 EXPOSE 3333
 
 CMD ["node", "main.js"]
