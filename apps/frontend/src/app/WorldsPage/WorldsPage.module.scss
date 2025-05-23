@@ -6,13 +6,32 @@
 }
 
 .sidebar {
+	display: flex;
+	flex-direction: column;
 	width: 20%;
 	background-color: $bg-light;
 	overflow-y: scroll;
+
+	&:hover .plus_icon_container {
+		opacity: 1;
+	}
 }
 
 .mainframe {
 	display: flex;
 	justify-content: center;
 	flex: 1;
+}
+
+.plus_icon_container {
+	height: 10%;
+	opacity: 0;
+
+	img {
+		display: block;
+		height: 60%;
+		width: auto;
+		margin: 0 auto;
+		cursor: pointer;
+	}
 }

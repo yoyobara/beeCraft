@@ -4,6 +4,7 @@ import axios from 'axios';
 import styles from './WorldsPage.module.scss';
 import { WorldEntry } from './WorldEntry';
 import { Mainframe } from './Mainframe';
+import { plusIcon } from '../../assets';
 
 interface World {
     id: number;
@@ -120,6 +121,9 @@ export function WorldsPage() {
                         deleteWorld={deleteWorld}
                     />
                 ))}
+                <div className={styles.plus_icon_container}>
+                    <img src={plusIcon} alt="new world" />
+                </div>
             </div>
 
             <div className={styles.mainframe}>
