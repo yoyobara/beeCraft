@@ -1,9 +1,14 @@
+import { randomUUID } from 'crypto';
 import { Request, Response } from 'express';
 import { World } from '../../models';
 import { msg } from '../../utils/response';
 
 export async function createNewWorld(req: Request, res: Response) {
-    const { name } = req.body;
+    let { name } = req.body;
+
+    if (!name) {
+        name = `new-world-${randomUUID()}`;
+    }
 
     const worldExists = await World.findOne({
         where: { name, userId: req.user.id },

@@ -11,6 +11,7 @@ interface MainframeProps {
 }
 
 export function Mainframe({ worldId }: MainframeProps) {
+    console.log(worldId);
     const [points, setPoints] = useState<PointOfInterest[]>([]);
     const [additionModalOpen, setAdditionModalOpen] = useState<boolean>(false);
 

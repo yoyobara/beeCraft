@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useState } from 'react';
 import useLocalStorage from 'use-local-storage';
 import axios from 'axios';
+import { plusIcon } from '../../assets';
 import styles from './WorldsPage.module.scss';
 import { WorldEntry } from './WorldEntry';
 import { Mainframe } from './Mainframe';
-import { plusIcon } from '../../assets';
 
 interface World {
     id: number;
@@ -77,6 +77,19 @@ export function WorldsPage() {
         return status === 200;
     };
 
+    const handleNewWorld = async () => {
+        await axios.post<unknown, { newWorldId: number }>(
+            '/world/new',
+            {},
+            {
+                withCredentials: true,
+            }
+        );
+
+        setSelectedWorldId(null);
+        await fetchWorlds();
+    };
+
     useEffect(() => {
         fetchWorlds();
     }, [fetchWorlds]);
@@ -122,7 +135,11 @@ export function WorldsPage() {
                     />
                 ))}
                 <div className={styles.plus_icon_container}>
-                    <img src={plusIcon} alt="new world" />
+                    <img
+                        onClick={handleNewWorld}
+                        src={plusIcon}
+                        alt="new world"
+                    />
                 </div>
             </div>
 
