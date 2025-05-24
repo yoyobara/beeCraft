@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import useLocalStorage from 'use-local-storage';
 import axios from 'axios';
 import { plusIcon } from '../../assets';
@@ -16,6 +16,7 @@ export function WorldsPage() {
     const [selectedWorldId, setSelectedWorldId] = useLocalStorage<
         null | number
     >('selected_world_id', null);
+    const sidebarRef = useRef<HTMLDivElement>(null);
 
     const fetchWorlds = useCallback(async () => {
         const fetchedWorlds = (
@@ -88,6 +89,7 @@ export function WorldsPage() {
 
         setSelectedWorldId(null);
         await fetchWorlds();
+        sidebarRef.current?.scrollTo(0, 0);
     };
 
     useEffect(() => {
@@ -120,7 +122,14 @@ export function WorldsPage() {
 
     return (
         <div className={styles.worlds_page}>
-            <div className={styles.sidebar}>
+            <div className={styles.sidebar} ref={sidebarRef}>
+                <div className={styles.plus_icon_container}>
+                    <img
+                        onClick={handleNewWorld}
+                        src={plusIcon}
+                        alt="new world"
+                    />
+                </div>
                 {worlds.map((world) => (
                     <WorldEntry
                         key={world.id}
@@ -134,13 +143,6 @@ export function WorldsPage() {
                         deleteWorld={deleteWorld}
                     />
                 ))}
-                <div className={styles.plus_icon_container}>
-                    <img
-                        onClick={handleNewWorld}
-                        src={plusIcon}
-                        alt="new world"
-                    />
-                </div>
             </div>
 
             <div className={styles.mainframe}>
