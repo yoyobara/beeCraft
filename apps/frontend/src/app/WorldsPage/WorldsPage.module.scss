@@ -11,10 +11,6 @@
 	width: 20%;
 	background-color: $bg-light;
 	overflow-y: scroll;
-
-	&:hover .plus_icon_container {
-		opacity: 1;
-	}
 }
 
 .mainframe {
@@ -25,7 +21,6 @@
 
 .plus_icon_container {
 	height: 7%;
-	opacity: 0;
 
 	display: flex;
 	justify-content: center;

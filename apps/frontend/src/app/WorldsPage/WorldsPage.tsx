@@ -16,6 +16,7 @@ export function WorldsPage() {
     const [selectedWorldId, setSelectedWorldId] = useLocalStorage<
         null | number
     >('selected_world_id', null);
+    const [plusVisible, setPlusVisible] = useState<boolean>(false);
     const sidebarRef = useRef<HTMLDivElement>(null);
 
     const fetchWorlds = useCallback(async () => {
@@ -122,14 +123,21 @@ export function WorldsPage() {
 
     return (
         <div className={styles.worlds_page}>
-            <div className={styles.sidebar} ref={sidebarRef}>
-                <div className={styles.plus_icon_container}>
-                    <img
-                        onClick={handleNewWorld}
-                        src={plusIcon}
-                        alt="new world"
-                    />
-                </div>
+            <div
+                onMouseEnter={() => setPlusVisible(true)}
+                onMouseLeave={() => setPlusVisible(false)}
+                className={styles.sidebar}
+                ref={sidebarRef}
+            >
+                {plusVisible && (
+                    <div className={styles.plus_icon_container}>
+                        <img
+                            onClick={handleNewWorld}
+                            src={plusIcon}
+                            alt="new world"
+                        />
+                    </div>
+                )}
                 {worlds.map((world) => (
                     <WorldEntry
                         key={world.id}
