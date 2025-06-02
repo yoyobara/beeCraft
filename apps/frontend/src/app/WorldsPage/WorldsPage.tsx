@@ -21,7 +21,7 @@ export function WorldsPage() {
 
     const fetchWorlds = useCallback(async () => {
         const fetchedWorlds = (
-            await axios.get<World[]>('/world/all', {
+            await axios.get<World[]>('/world', {
                 withCredentials: true,
             })
         ).data;
@@ -45,8 +45,8 @@ export function WorldsPage() {
     }, [setSelectedWorldId]);
 
     const renameWorld = async (id: number, newName: string) => {
-        const { status } = await axios.post(
-            '/world/rename',
+        const { status } = await axios.patch(
+            '/world',
 
             { worldId: id, newName },
 
@@ -63,16 +63,13 @@ export function WorldsPage() {
     };
 
     const deleteWorld = async (id: number) => {
-        const { status } = await axios.post(
-            '/world/delete',
-
-            { worldId: id },
-
-            {
-                withCredentials: true,
-                validateStatus: (status) => [200, 404, 403].includes(status),
-            }
-        );
+        const { status } = await axios.delete('/world', {
+            withCredentials: true,
+            validateStatus: (status) => [200, 404, 403].includes(status),
+            params: {
+                worldId: id,
+            },
+        });
 
         await fetchWorlds();
 
@@ -81,7 +78,7 @@ export function WorldsPage() {
 
     const handleNewWorld = async () => {
         await axios.post<unknown, { newWorldId: number }>(
-            '/world/new',
+            '/world',
             {},
             {
                 withCredentials: true,

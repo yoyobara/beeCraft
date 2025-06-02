@@ -35,7 +35,7 @@ export function Mainframe({ worldId }: MainframeProps) {
             const pinnedAt = pin ? new Date(Date.now()) : null;
 
             await axios.patch(
-                '/points/edit',
+                '/points',
                 { pointId: id, pointPatch: { pinnedAt } },
                 { withCredentials: true }
             );
@@ -47,11 +47,10 @@ export function Mainframe({ worldId }: MainframeProps) {
 
     const handleDeletion = useCallback(
         async (id: number) => {
-            await axios.post(
-                '/points/delete',
-                { pointId: id },
-                { withCredentials: true }
-            );
+            await axios.delete('/points', {
+                withCredentials: true,
+                params: { pointId: id },
+            });
 
             await fetchPoints();
         },
@@ -61,7 +60,7 @@ export function Mainframe({ worldId }: MainframeProps) {
     const handleNew = useCallback(
         async (fields: newPointFields) => {
             await axios.post(
-                '/points/new',
+                '/points',
                 {
                     worldId,
                     point: fields,

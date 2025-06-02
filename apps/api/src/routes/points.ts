@@ -13,6 +13,6 @@ export const pointsRouter: Router = Router();
 pointsRouter.use(authenticate);
 
 pointsRouter.get('/', getPoints);
-pointsRouter.post('/new', createNewPoint);
-pointsRouter.patch('/edit', patchPoint);
-pointsRouter.post('/delete', deletePoint);
+pointsRouter.post('/', createNewPoint);
+pointsRouter.patch('/', patchPoint);
+pointsRouter.delete('/', deletePoint);

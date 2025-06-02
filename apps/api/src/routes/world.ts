@@ -12,7 +12,7 @@ export const worldRouter: Router = Router();
 
 worldRouter.use(authenticate);
 
-worldRouter.get('/all', getAllWorlds);
-worldRouter.post('/new', createNewWorld);
-worldRouter.post('/rename', renameWorld);
-worldRouter.post('/delete', deleteWorld);
+worldRouter.get('/', getAllWorlds);
+worldRouter.post('/', createNewWorld);
+worldRouter.patch('/', renameWorld);
+worldRouter.delete('/', deleteWorld);

@@ -20,7 +20,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
     const [fullName, setFullName] = useState<string | null>(null);
 
     const refreshAuth = async () => {
-        const info = await axios.get('/user/info', {
+        const info = await axios.get('/user/me', {
             withCredentials: true,
             validateStatus: (status) => [200, 401].includes(status),
         });

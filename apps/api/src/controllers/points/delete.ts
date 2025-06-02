@@ -3,7 +3,7 @@ import { PointOfInterest } from '../../models';
 import { msg } from '../../utils/response';
 
 export async function deletePoint(req: Request, res: Response) {
-    const { pointId } = req.body;
+    const { pointId } = req.query;
 
     const point = await PointOfInterest.findByPk(pointId);
     if (!point) {

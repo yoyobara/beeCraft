@@ -3,7 +3,7 @@ import { World } from '../../models';
 import { msg } from '../../utils/response';
 
 export async function deleteWorld(req: Request, res: Response) {
-    const { worldId } = req.body;
+    const { worldId } = req.query;
 
     const world = await World.findByPk(worldId);
     if (world === null) {
