@@ -1,94 +1,20 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
-import useLocalStorage from 'use-local-storage';
-import axios from 'axios';
+import { useEffect, useRef, useState } from 'react';
+import { useLocalStorage } from 'usehooks-ts';
 import { plusIcon } from '../../assets';
+import { useWorlds } from '../../hooks/worlds';
 import styles from './WorldsPage.module.scss';
 import { WorldEntry } from './WorldEntry';
 import { Mainframe } from './Mainframe';
 
-interface World {
-    id: number;
-    name: string;
-}
-
 export function WorldsPage() {
-    const [worlds, setWorlds] = useState<World[]>([]);
+    const [plusVisible, setPlusVisible] = useState<boolean>(false);
     const [selectedWorldId, setSelectedWorldId] = useLocalStorage<
         null | number
     >('selected_world_id', null);
-    const [plusVisible, setPlusVisible] = useState<boolean>(false);
     const sidebarRef = useRef<HTMLDivElement>(null);
 
-    const fetchWorlds = useCallback(async () => {
-        const fetchedWorlds = (
-            await axios.get<World[]>('/world', {
-                withCredentials: true,
-            })
-        ).data;
-
-        setWorlds(fetchedWorlds);
-
-        setSelectedWorldId((prevWorldId) => {
-            if (fetchedWorlds.length > 0) {
-                if (
-                    prevWorldId === null ||
-                    fetchedWorlds.every((world) => world.id !== prevWorldId)
-                ) {
-                    return fetchedWorlds[0].id;
-                }
-
-                return prevWorldId;
-            } else {
-                return null;
-            }
-        });
-    }, [setSelectedWorldId]);
-
-    const renameWorld = async (id: number, newName: string) => {
-        const { status } = await axios.patch(
-            '/world',
-
-            { worldId: id, newName },
-
-            {
-                withCredentials: true,
-
-                validateStatus: (status) => [200, 409].includes(status),
-            }
-        );
-
-        await fetchWorlds();
-
-        return status === 200;
-    };
-
-    const deleteWorld = async (id: number) => {
-        const { status } = await axios.delete('/world', {
-            withCredentials: true,
-            validateStatus: (status) => [200, 404, 403].includes(status),
-            params: {
-                worldId: id,
-            },
-        });
-
-        await fetchWorlds();
-
-        return status === 200;
-    };
-
-    const handleNewWorld = async () => {
-        await axios.post<unknown, { newWorldId: number }>(
-            '/world',
-            {},
-            {
-                withCredentials: true,
-            }
-        );
-
-        setSelectedWorldId(null);
-        await fetchWorlds();
-        sidebarRef.current?.scrollTo(0, 0);
-    };
+    const { worlds, fetchWorlds, createWorld, deleteWorld, renameWorld } =
+        useWorlds(setSelectedWorldId, sidebarRef);
 
     useEffect(() => {
         fetchWorlds();
@@ -129,7 +55,7 @@ export function WorldsPage() {
                 {plusVisible && (
                     <div className={styles.plus_icon_container}>
                         <img
-                            onClick={handleNewWorld}
+                            onClick={createWorld}
                             src={plusIcon}
                             alt="new world"
                         />
