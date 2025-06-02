@@ -17,7 +17,7 @@ export async function createNewWorld(req: Request, res: Response) {
     if (worldExists) {
         res.status(409).send(msg(`world ${name} exists already`));
     } else {
-        await req.user.createWorld({ name });
-        res.sendStatus(200);
+        const { id } = await req.user.createWorld({ name });
+        res.send({ newWorldId: id });
     }
 }

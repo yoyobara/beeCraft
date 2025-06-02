@@ -1,16 +1,17 @@
 import axios from 'axios';
 import { useCallback, useState } from 'react';
+import { useLocalStorage } from 'usehooks-ts';
 
 interface World {
     id: number;
     name: string;
 }
 
-export function useWorlds(
-    setSelectedWorldId: React.Dispatch<React.SetStateAction<number | null>>,
-    sidebarRef: React.RefObject<HTMLDivElement | null>
-) {
+export function useWorlds() {
     const [worlds, setWorlds] = useState<World[]>([]);
+    const [selectedWorldId, setSelectedWorldId] = useLocalStorage<
+        null | number
+    >('selected_world_id', null);
 
     const fetchWorlds = useCallback(async () => {
         const fetchedWorlds = (
@@ -76,7 +77,7 @@ export function useWorlds(
     );
 
     const createWorld = useCallback(async () => {
-        await axios.post<unknown, { newWorldId: number }>(
+        const response = await axios.post(
             '/world',
             {},
             {
@@ -84,10 +85,18 @@ export function useWorlds(
             }
         );
 
-        setSelectedWorldId(null);
         await fetchWorlds();
-        sidebarRef.current?.scrollTo(0, 0);
-    }, [fetchWorlds, setSelectedWorldId, sidebarRef]);
 
-    return { worlds, fetchWorlds, renameWorld, deleteWorld, createWorld };
+        return response.data.newWorldId;
+    }, [fetchWorlds]);
+
+    return {
+        worlds,
+        selectedWorldId,
+        setSelectedWorldId,
+        fetchWorlds,
+        renameWorld,
+        deleteWorld,
+        createWorld,
+    };
 }

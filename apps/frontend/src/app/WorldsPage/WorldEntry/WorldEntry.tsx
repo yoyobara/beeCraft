@@ -8,6 +8,8 @@ interface WorldEntryProps {
     name: string;
     id: number;
     isSelected: boolean;
+    isEdit: boolean;
+    setIsEdit: (isEdit: boolean) => void;
     onClick: React.MouseEventHandler<HTMLDivElement>;
     renameWorld: (id: number, newName: string) => Promise<boolean>;
     deleteWorld: (id: number) => Promise<boolean>;
@@ -17,6 +19,8 @@ export function WorldEntry({
     name,
     id,
     isSelected,
+    isEdit,
+    setIsEdit,
     onClick,
     renameWorld,
     deleteWorld,
@@ -27,7 +31,6 @@ export function WorldEntry({
     }>(null);
     const threeDotsRef = useRef(null);
 
-    const [isEdit, setIsEdit] = useState<boolean>(false);
     const [newName, setNewName] = useState<string>(name);
     const nameRef = useRef<HTMLInputElement>(null);
 
@@ -68,7 +71,7 @@ export function WorldEntry({
                             setNewName(ev.target.value);
                         }}
                         value={newName}
-                        // onBlur={finishRename}
+                        onBlur={finishRename}
                         onKeyDown={(ev) => {
                             ev.key === 'Enter' && finishRename();
                         }}

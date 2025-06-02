@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import { useLocalStorage } from 'usehooks-ts';
 import { plusIcon } from '../../assets';
 import { useWorlds } from '../../hooks/worlds';
 import styles from './WorldsPage.module.scss';
@@ -8,13 +7,18 @@ import { Mainframe } from './Mainframe';
 
 export function WorldsPage() {
     const [plusVisible, setPlusVisible] = useState<boolean>(false);
-    const [selectedWorldId, setSelectedWorldId] = useLocalStorage<
-        null | number
-    >('selected_world_id', null);
+    const [editingWorldId, setEditingWorldId] = useState<number | null>(null);
     const sidebarRef = useRef<HTMLDivElement>(null);
 
-    const { worlds, fetchWorlds, createWorld, deleteWorld, renameWorld } =
-        useWorlds(setSelectedWorldId, sidebarRef);
+    const {
+        worlds,
+        selectedWorldId,
+        setSelectedWorldId,
+        fetchWorlds,
+        createWorld,
+        deleteWorld,
+        renameWorld,
+    } = useWorlds();
 
     useEffect(() => {
         fetchWorlds();
@@ -55,7 +59,10 @@ export function WorldsPage() {
                 {plusVisible && (
                     <div className={styles.plus_icon_container}>
                         <img
-                            onClick={createWorld}
+                            onClick={async () => {
+                                const createdId = await createWorld();
+                                setEditingWorldId(createdId);
+                            }}
                             src={plusIcon}
                             alt="new world"
                         />
@@ -67,6 +74,10 @@ export function WorldsPage() {
                         id={world.id}
                         name={world.name}
                         isSelected={world.id === selectedWorldId}
+                        isEdit={world.id === editingWorldId}
+                        setIsEdit={(isEdit: boolean) => {
+                            setEditingWorldId(isEdit ? world.id : null);
+                        }}
                         onClick={() => {
                             setSelectedWorldId(world.id);
                         }}
